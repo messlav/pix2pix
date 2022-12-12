@@ -52,22 +52,22 @@ def main(dataset: str):
     # loss, optimizer and hyperparameters
     current_step = 0
     loss_fn = l1_loss()
-    optimizer = torch.optim.Adam(G.parameters(), lr=CheckpointConfig.learning_rate,
-                                 betas=(CheckpointConfig.beta1, CheckpointConfig.beta2))
-    os.makedirs(CheckpointConfig.save_path, exist_ok=True)
+    optimizer = torch.optim.Adam(G.parameters(), lr=checkpoint_config.learning_rate,
+                                 betas=(checkpoint_config.beta1, checkpoint_config.beta2))
+    os.makedirs(checkpoint_config.save_path, exist_ok=True)
     logger = WanDBWriter(checkpoint_config)
     logger.watch_model(G)
     scaler = torch.cuda.amp.GradScaler()
     # train
     G.train()
-    tqdm_bar = tqdm(total=CheckpointConfig.num_epochs * len(train_loader) - current_step)
-    for epoch in range(CheckpointConfig.num_epochs):
+    tqdm_bar = tqdm(total=checkpoint_config.num_epochs * len(train_loader) - current_step)
+    for epoch in range(checkpoint_config.num_epochs):
         for i, (tgt_imgs, segm_imgs) in enumerate(train_loader):
             current_step += 1
             tqdm_bar.update(1)
             logger.set_step(current_step)
 
-            tgt_imgs, segm_imgs = tgt_imgs.to(CheckpointConfig.device), segm_imgs.to(CheckpointConfig.device)
+            tgt_imgs, segm_imgs = tgt_imgs.to(checkpoint_config.device), segm_imgs.to(checkpoint_config.device)
             with torch.cuda.amp.autocast():
                 fake = G(segm_imgs)
 
@@ -80,21 +80,21 @@ def main(dataset: str):
             logger.add_scalar('loss', loss.item())
 
         # save model
-        if epoch != 0 and epoch % CheckpointConfig.save_epochs == 0:
+        if epoch != 0 and epoch % checkpoint_config.save_epochs == 0:
             torch.save({'Generator': G.state_dict(), 'optimizer': optimizer.state_dict(
-            )}, os.path.join(CheckpointConfig.save_path, 'checkpoint_%d.pth.tar' % epoch))
+            )}, os.path.join(checkpoint_config.save_path, 'checkpoint_%d.pth.tar' % epoch))
 
         # validate and wandb log
-        if epoch % CheckpointConfig.validate_epochs == 0 or epoch == CheckpointConfig.num_epochs - 1:
+        if epoch % checkpoint_config.validate_epochs == 0 or epoch == checkpoint_config.num_epochs - 1:
             # add val images
             tgt_imgs, segm_imgs = next(iter(test_loader))
-            tgt_imgs, segm_imgs = tgt_imgs.to(CheckpointConfig.device), segm_imgs.to(CheckpointConfig.device)
+            tgt_imgs, segm_imgs = tgt_imgs.to(checkpoint_config.device), segm_imgs.to(checkpoint_config.device)
             G.eval()
             with torch.no_grad():
                 fake = G(segm_imgs)
                 fake = fake * 0.5 + 0.5  # denormalize?
 
-            for q in range(CheckpointConfig.save_images):
+            for q in range(checkpoint_config.save_images):
                 # if q >= CheckpointConfig.batch_size:
                 #     break
                 logger.add_image(f'val/segmentation{q}', segm_imgs[q].detach().cpu().permute(1, 2, 0).numpy())
@@ -102,13 +102,13 @@ def main(dataset: str):
                 logger.add_image(f'val/prediction{q}', fake[q].detach().cpu().permute(1, 2, 0).numpy())
             # add train images
             tgt_imgs, segm_imgs = next(iter(train_loader))
-            tgt_imgs, segm_imgs = tgt_imgs.to(CheckpointConfig.device), segm_imgs.to(CheckpointConfig.device)
+            tgt_imgs, segm_imgs = tgt_imgs.to(checkpoint_config.device), segm_imgs.to(checkpoint_config.device)
             with torch.no_grad():
                 fake = G(segm_imgs)
                 fake = fake * 0.5 + 0.5
 
-            for q in range(CheckpointConfig.save_images):
-                if q >= CheckpointConfig.batch_size:
+            for q in range(checkpoint_config.save_images):
+                if q >= checkpoint_config.batch_size:
                     break
                 logger.add_image(f'train/segmentation{q}', segm_imgs[q].detach().cpu().permute(1, 2, 0).numpy())
                 logger.add_image(f'train/ground_true{q}', tgt_imgs[q].detach().cpu().permute(1, 2, 0).numpy())
@@ -116,7 +116,7 @@ def main(dataset: str):
             G.train()
 
     torch.save({'Generator': G.state_dict(), 'optimizer': optimizer.state_dict()},
-               os.path.join(CheckpointConfig.save_path, 'checkpoint_last.pth.tar'))
+               os.path.join(checkpoint_config.save_path, 'checkpoint_last.pth.tar'))
 
 
 if __name__ == '__main__':
