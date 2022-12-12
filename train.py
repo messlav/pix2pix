@@ -44,7 +44,7 @@ def main(dataset: str):
                               shuffle=True, num_workers=checkpoint_config.n_workers, pin_memory=True)
     test_loader = DataLoader(test_dataset, batch_size=checkpoint_config.save_images,
                              shuffle=False, num_workers=checkpoint_config.n_workers, pin_memory=True)
-    show_images(train_dataset, test_dataset)
+    # show_images(train_dataset, test_dataset)
     # model
     G = Generator(checkpoint_config.nc)
     init_weights(G, checkpoint_config.mean, checkpoint_config.std)

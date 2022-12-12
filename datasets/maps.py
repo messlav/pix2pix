@@ -28,7 +28,7 @@ class Maps(Dataset):
             input_img = self.transforms(input_img)
             tgt_img = self.transforms(tgt_img)
 
-        return input_img, tgt_img
+        return tgt_img, input_img
 
 
 def test():
