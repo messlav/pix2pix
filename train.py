@@ -1,32 +1,50 @@
 import torch
 import os
 from tqdm import tqdm
+from argparse import ArgumentParser
 from torch.utils.data import DataLoader
 
-from configs.checkpoint_config import CheckpointConfig
-from configs.dataset_config import DatasetConfig
+from configs.checkpoint_facades_config import CheckpointFacadesConfig
+from configs.checkpoint_maps_config import CheckpointMapsConfig
+from configs.dataset_facades_config import DatasetFacadesConfig
+from configs.dataset_maps_config import DatasetMapsConfig
 from model.generator import Generator
 from datasets.facades import FacadesDataset
+from datasets.maps import Maps
 from loss.l1_loss import l1_loss
 from utils.wandb_writer import WanDBWriter
 from utils.utils import show_images, init_weights
 
 
-def main():
-    # configs
-    checkpoint_config = CheckpointConfig()
-    dataset_config = DatasetConfig()
-    print('using', checkpoint_config.device)
-    # data
-    train_transforms = dataset_config.train_transforms
-    test_transforms = dataset_config.train_transforms
-    train_dataset = FacadesDataset('data', 'train', train_transforms)
-    test_dataset = FacadesDataset('data', 'test', test_transforms)
+def main(dataset: str):
+    if dataset == 'facades':
+        # configs
+        checkpoint_config = CheckpointFacadesConfig()
+        dataset_config = DatasetFacadesConfig()
+        print('using', checkpoint_config.device)
+        # data
+        train_transforms = dataset_config.train_transforms
+        test_transforms = dataset_config.train_transforms
+        train_dataset = FacadesDataset('data/facades', 'train', train_transforms)
+        test_dataset = FacadesDataset('data/facades', 'test', test_transforms)
+    elif dataset == 'maps':
+        # configs
+        checkpoint_config = CheckpointMapsConfig()
+        dataset_config = DatasetMapsConfig()
+        print('using', checkpoint_config.device)
+        # data
+        train_transforms = dataset_config.train_transforms
+        test_transforms = dataset_config.train_transforms
+        train_dataset = Maps('data/maps', 'train', train_transforms)
+        test_dataset = Maps('data/maps', 'val', test_transforms)
+    else:
+        raise NotImplementedError
+    # show_images(train_dataset, test_dataset)
     train_loader = DataLoader(train_dataset, batch_size=checkpoint_config.batch_size,
                               shuffle=True, num_workers=checkpoint_config.n_workers, pin_memory=True)
     test_loader = DataLoader(test_dataset, batch_size=checkpoint_config.save_images,
                              shuffle=False, num_workers=checkpoint_config.n_workers, pin_memory=True)
-    # show_images(train_dataset, test_dataset)
+    show_images(train_dataset, test_dataset)
     # model
     G = Generator(checkpoint_config.nc)
     init_weights(G, checkpoint_config.mean, checkpoint_config.std)
@@ -102,4 +120,8 @@ def main():
 
 
 if __name__ == '__main__':
-    main()
+    parser = ArgumentParser()
+    parser.add_argument(
+        "--dataset", type=str, default='facades', help="dataset. 'maps' or 'facades'")
+    args = parser.parse_args()
+    main(args.dataset)

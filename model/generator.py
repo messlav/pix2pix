@@ -5,10 +5,10 @@ import torch.nn as nn
 class DownBlock(nn.Module):
     def __init__(self, in_channels, out_channels):
         super(DownBlock, self).__init__()
-        self.conv = nn.Conv2d(in_channels, out_channels, kernel_size=(4, 4),
-                              stride=(2, 2), padding=(1, 1), bias=False, padding_mode='reflect')
-        self.batch_norm = nn.BatchNorm2d(out_channels)
-        # self.batch_norm = nn.InstanceNorm2d(out_channels, affine=True)  # might be better. or not :)
+        self.conv = nn.Conv2d(in_channels, out_channels, kernel_size=4,
+                              stride=2, padding=1, bias=False, padding_mode='reflect')
+        # self.batch_norm = nn.BatchNorm2d(out_channels)
+        self.batch_norm = nn.InstanceNorm2d(out_channels, affine=True)  # might be better. or not :)
         self.activation = nn.LeakyReLU(0.2)
 
     def forward(self, x):
@@ -21,10 +21,10 @@ class DownBlock(nn.Module):
 class UpBlock(nn.Module):
     def __init__(self, in_channels, out_channels, dropout=True):
         super(UpBlock, self).__init__()
-        self.conv = nn.ConvTranspose2d(in_channels, out_channels, kernel_size=(4, 4),
-                                       stride=(2, 2), padding=(1, 1), bias=False, padding_mode='zeros')
-        self.batch_norm = nn.BatchNorm2d(out_channels)
-        # self.batch_norm = nn.InstanceNorm2d(out_channels, affine=True)  # might be better. or not :)
+        self.conv = nn.ConvTranspose2d(in_channels, out_channels, kernel_size=4,
+                                       stride=2, padding=1, bias=False, padding_mode='zeros')
+        # self.batch_norm = nn.BatchNorm2d(out_channels)
+        self.batch_norm = nn.InstanceNorm2d(out_channels, affine=True)  # might be better. or not :)
         self.dropout = nn.Dropout(0.5) if dropout else None
         self.activation = nn.ReLU()
 
@@ -42,7 +42,7 @@ class Generator(nn.Module):
         super(Generator, self).__init__()  # nc x 256 x 256
 
         self.first_down = nn.Sequential(
-            nn.Conv2d(in_channels, 64, kernel_size=(4, 4), stride=(2, 2), padding=(1, 1), padding_mode='reflect'),
+            nn.Conv2d(in_channels, 64, kernel_size=4, stride=2, padding=1, padding_mode='reflect'),
             nn.LeakyReLU(0.2)
         )  # 64 x 128 x 128
         self.down1 = DownBlock(64, 128)  # 128 x 64 x 64
@@ -52,7 +52,7 @@ class Generator(nn.Module):
         self.down5 = DownBlock(512, 512)  # 512 x 4 x 4
         self.down6 = DownBlock(512, 512)  # 512 x 2 x 2
         self.bottleneck = nn.Sequential(
-            nn.Conv2d(512, 512, kernel_size=(4, 4), stride=(2, 2), padding=(1, 1), padding_mode='reflect'),
+            nn.Conv2d(512, 512, kernel_size=4, stride=2, padding=1, padding_mode='reflect'),
             nn.ReLU()
         )  # 512 x 1 x 1
 
@@ -64,7 +64,7 @@ class Generator(nn.Module):
         self.up6 = UpBlock(512, 128, dropout=False)  # 128 x 32 x 32
         self.up7 = UpBlock(256, 64, dropout=False)  # 64 x 64 x 64
         self.last_up = nn.Sequential(
-            nn.ConvTranspose2d(128, in_channels, kernel_size=(4, 4), stride=(2, 2), padding=(1, 1), padding_mode='zeros'),
+            nn.ConvTranspose2d(128, in_channels, kernel_size=4, stride=2, padding=1, padding_mode='zeros'),
             nn.Tanh()
         )  # 3 x 128 x 128
 
