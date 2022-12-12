@@ -3,6 +3,7 @@ import os
 from tqdm import tqdm
 from argparse import ArgumentParser
 from torch.utils.data import DataLoader
+import torch.nn as nn
 
 from configs.checkpoint_facades_config import CheckpointFacadesConfig
 from configs.checkpoint_maps_config import CheckpointMapsConfig
@@ -51,7 +52,7 @@ def main(dataset: str):
     G = G.to(checkpoint_config.device)
     # loss, optimizer and hyperparameters
     current_step = 0
-    loss_fn = l1_loss()
+    loss_fn = nn.L1Loss()
     optimizer = torch.optim.Adam(G.parameters(), lr=checkpoint_config.learning_rate,
                                  betas=(checkpoint_config.beta1, checkpoint_config.beta2))
     os.makedirs(checkpoint_config.save_path, exist_ok=True)
@@ -72,7 +73,7 @@ def main(dataset: str):
                 fake = G(segm_imgs)
 
             optimizer.zero_grad()
-            loss = loss_fn(tgt_imgs, fake)
+            loss = loss_fn(fake, tgt_imgs)
             scaler.scale(loss).backward()
             scaler.step(optimizer)
             scaler.update()
@@ -97,9 +98,9 @@ def main(dataset: str):
             for q in range(checkpoint_config.save_images):
                 # if q >= CheckpointConfig.batch_size:
                 #     break
-                logger.add_image(f'val/segmentation{q}', segm_imgs[q].detach().cpu().permute(1, 2, 0).numpy())
-                logger.add_image(f'val/ground_true{q}', tgt_imgs[q].detach().cpu().permute(1, 2, 0).numpy())
-                logger.add_image(f'val/prediction{q}', fake[q].detach().cpu().permute(1, 2, 0).numpy())
+                logger.add_image(f'val/segmentation{q}', segm_imgs[q].detach().cpu().numpy())
+                logger.add_image(f'val/ground_true{q}', tgt_imgs[q].detach().cpu().numpy())
+                logger.add_image(f'val/prediction{q}', fake[q].detach().cpu().numpy())
             # add train images
             tgt_imgs, segm_imgs = next(iter(train_loader))
             tgt_imgs, segm_imgs = tgt_imgs.to(checkpoint_config.device), segm_imgs.to(checkpoint_config.device)

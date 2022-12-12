@@ -7,8 +7,8 @@ class CheckpointMapsConfig:
     wandb_project = 'pix2pix'
     device = 'cuda:0' if torch.cuda.is_available() else 'cpu'
     nc = 3
-    n_workers = 4
-    num_epochs = 200
+    n_workers = 8
+    num_epochs = 2000
     save_epochs = 50
     validate_epochs = 10
     save_images = 3
