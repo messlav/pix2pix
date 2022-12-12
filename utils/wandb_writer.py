@@ -36,6 +36,9 @@ class WanDBWriter:
     def scalar_name(self, scalar_name):
         return f"{self.mode}/{scalar_name}"
 
+    def watch_model(self, model, criterion=None):
+        self.wandb.watch(model)
+
     def add_scalar(self, scalar_name, scalar):
         self.wandb.log({
             self.scalar_name(scalar_name): scalar,

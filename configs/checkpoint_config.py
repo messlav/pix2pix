@@ -7,9 +7,10 @@ class CheckpointConfig:
     wandb_project = 'pix2pix'
     device = 'cuda:0' if torch.cuda.is_available() else 'cpu'
     nc = 3
+    n_workers = 4
     num_epochs = 200
-    save_epochs = 20
-    validate_epochs = 1
+    save_epochs = 50
+    validate_epochs = 10
     save_images = 3
     batch_size = 1
     save_path = 'checkpoint_weights'
