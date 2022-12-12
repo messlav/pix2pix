@@ -4,7 +4,6 @@ from tqdm import tqdm
 from argparse import ArgumentParser
 from torch.utils.data import DataLoader
 import torch.nn as nn
-import torchvision.transforms as T
 
 from configs.checkpoint_facades_config import CheckpointFacadesConfig
 from configs.checkpoint_maps_config import CheckpointMapsConfig
@@ -97,27 +96,29 @@ def main(dataset: str):
             G.eval()
             with torch.no_grad():
                 fake = G(segm_imgs)
-                fake = fake * 0.5 + 0.5  # denormalize?
 
             for q in range(checkpoint_config.save_images):
-                # if q >= CheckpointConfig.batch_size:
-                #     break
-                logger.add_image(f'val/segmentation{q}', segm_imgs[q].detach().cpu().permute(1, 2, 0).numpy() * 0.5 + 0.5)
-                logger.add_image(f'val/ground_true{q}', tgt_imgs[q].detach().cpu().permute(1, 2, 0).numpy() * 0.5 + 0.5)
-                logger.add_image(f'val/prediction{q}', fake[q].detach().cpu().permute(1, 2, 0).numpy() * 0.5 + 0.5)
+                logger.add_image(f'val/segmentation{q}',
+                                 segm_imgs[q].detach().cpu().permute(1, 2, 0).numpy() * 0.5 + 0.5)
+                logger.add_image(f'val/ground_true{q}',
+                                 tgt_imgs[q].detach().cpu().permute(1, 2, 0).numpy() * 0.5 + 0.5)
+                logger.add_image(f'val/prediction{q}',
+                                 fake[q].detach().cpu().permute(1, 2, 0).numpy() * 0.5 + 0.5)
             # add train images
             tgt_imgs, segm_imgs = next(iter(train_loader))
             tgt_imgs, segm_imgs = tgt_imgs.to(checkpoint_config.device), segm_imgs.to(checkpoint_config.device)
             with torch.no_grad():
                 fake = G(segm_imgs)
-                fake = fake * 0.5 + 0.5
 
             for q in range(checkpoint_config.save_images):
                 if q >= checkpoint_config.batch_size:
                     break
-                logger.add_image(f'train/segmentation{q}', segm_imgs[q].detach().cpu().permute(1, 2, 0).numpy() * 0.5 + 0.5)
-                logger.add_image(f'train/ground_true{q}', tgt_imgs[q].detach().cpu().permute(1, 2, 0).numpy() * 0.5 + 0.5)
-                logger.add_image(f'train/prediction{q}', fake[q].detach().cpu().permute(1, 2, 0).numpy() * 0.5 + 0.5)
+                logger.add_image(f'train/segmentation{q}',
+                                 segm_imgs[q].detach().cpu().permute(1, 2, 0).numpy() * 0.5 + 0.5)
+                logger.add_image(f'train/ground_true{q}',
+                                 tgt_imgs[q].detach().cpu().permute(1, 2, 0).numpy() * 0.5 + 0.5)
+                logger.add_image(f'train/prediction{q}',
+                                 fake[q].detach().cpu().permute(1, 2, 0).numpy() * 0.5 + 0.5)
             G.train()
 
     torch.save({'Generator': G.state_dict(), 'optimizer': optimizer.state_dict()},

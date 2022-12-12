@@ -109,7 +109,7 @@ class Generator(nn.Module):
 def test():
     x = torch.randn((10, 3, 256, 256))  # b x nc x w x h
     G = Generator(x.shape[1])
-    print(G(x).shape)
+    print(G(x)[0].shape)
 
 
 if __name__ == '__main__':
