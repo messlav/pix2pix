@@ -1,0 +1,168 @@
+2022-12-12 16:05:01,408 INFO    StreamThr :91863 [internal.py:wandb_internal():88] W&B internal server running at pid: 91863, started at: 2022-12-12 16:05:01.404179
+2022-12-12 16:05:01,430 DEBUG   HandlerThread:91863 [handler.py:handle_request():139] handle_request: status
+2022-12-12 16:05:01,431 DEBUG   SenderThread:91863 [sender.py:send_request():317] send_request: status
+2022-12-12 16:05:01,433 DEBUG   SenderThread:91863 [sender.py:send():303] send: header
+2022-12-12 16:05:01,434 INFO    WriterThread:91863 [datastore.py:open_for_write():75] open: /Users/slavapirogov/pix2pix/wandb/run-20221212_160501-3bc39w9p/run-3bc39w9p.wandb
+2022-12-12 16:05:01,445 DEBUG   SenderThread:91863 [sender.py:send():303] send: run
+2022-12-12 16:05:02,271 DEBUG   HandlerThread:91863 [handler.py:handle_request():139] handle_request: check_version
+2022-12-12 16:05:02,272 INFO    SenderThread:91863 [dir_watcher.py:__init__():216] watching files in: /Users/slavapirogov/pix2pix/wandb/run-20221212_160501-3bc39w9p/files
+2022-12-12 16:05:02,272 INFO    SenderThread:91863 [sender.py:_start_run_threads():928] run started: 3bc39w9p with start time 1670853901.371663
+2022-12-12 16:05:02,272 DEBUG   SenderThread:91863 [sender.py:send():303] send: summary
+2022-12-12 16:05:02,273 INFO    SenderThread:91863 [sender.py:_save_file():1171] saving file wandb-summary.json with policy end
+2022-12-12 16:05:02,274 DEBUG   SenderThread:91863 [sender.py:send_request():317] send_request: check_version
+2022-12-12 16:05:02,692 DEBUG   HandlerThread:91863 [handler.py:handle_request():139] handle_request: run_start
+2022-12-12 16:05:02,706 DEBUG   HandlerThread:91863 [system_info.py:__init__():31] System info init
+2022-12-12 16:05:02,706 DEBUG   HandlerThread:91863 [system_info.py:__init__():46] System info init done
+2022-12-12 16:05:02,707 INFO    HandlerThread:91863 [system_monitor.py:start():150] Starting system monitor
+2022-12-12 16:05:02,707 INFO    SystemMonitor:91863 [system_monitor.py:_start():116] Starting system asset monitoring threads
+2022-12-12 16:05:02,707 INFO    HandlerThread:91863 [system_monitor.py:probe():168] Collecting system info
+2022-12-12 16:05:02,709 INFO    SystemMonitor:91863 [interfaces.py:start():168] Started cpu
+2022-12-12 16:05:02,709 INFO    SystemMonitor:91863 [interfaces.py:start():168] Started disk
+2022-12-12 16:05:02,710 DEBUG   HandlerThread:91863 [system_info.py:probe():195] Probing system
+2022-12-12 16:05:02,711 INFO    SystemMonitor:91863 [interfaces.py:start():168] Started memory
+2022-12-12 16:05:02,713 INFO    SystemMonitor:91863 [interfaces.py:start():168] Started network
+2022-12-12 16:05:02,720 DEBUG   HandlerThread:91863 [system_info.py:_probe_git():180] Probing git
+2022-12-12 16:05:02,754 DEBUG   HandlerThread:91863 [system_info.py:_probe_git():188] Probing git done
+2022-12-12 16:05:02,755 DEBUG   HandlerThread:91863 [system_info.py:probe():241] Probing system done
+2022-12-12 16:05:02,755 DEBUG   HandlerThread:91863 [system_monitor.py:probe():177] {'os': 'macOS-10.16-x86_64-i386-64bit', 'python': '3.9.7', 'heartbeatAt': '2022-12-12T14:05:02.711144', 'startedAt': '2022-12-12T14:05:01.333909', 'docker': None, 'cuda': None, 'args': (), 'state': 'running', 'program': '/Users/slavapirogov/pix2pix/train.py', 'codePath': 'train.py', 'git': {'remote': 'https://github.com/messlav/pix2pix.git', 'commit': 'b326c23b1d3c18cbe821a5d80cf9c7621bbc43d9'}, 'email': 'slav.pirogow@yandex.ru', 'root': '/Users/slavapirogov/pix2pix', 'host': 'MacBook-Air-Slava.local', 'username': 'slavapirogov', 'executable': '/Users/slavapirogov/pix2pix/venv/bin/python', 'cpu_count': 2, 'cpu_count_logical': 4, 'cpu_freq': {'current': 1100, 'min': 1100, 'max': 1100}, 'cpu_freq_per_core': [{'current': 1100, 'min': 1100, 'max': 1100}], 'disk': {'total': 233.46913528442383, 'used': 8.220638275146484}, 'memory': {'total': 8.0}}
+2022-12-12 16:05:02,755 INFO    HandlerThread:91863 [system_monitor.py:probe():178] Finished collecting system info
+2022-12-12 16:05:02,755 INFO    HandlerThread:91863 [system_monitor.py:probe():181] Publishing system info
+2022-12-12 16:05:02,756 DEBUG   HandlerThread:91863 [system_info.py:_save_pip():51] Saving list of pip packages installed into the current environment
+2022-12-12 16:05:02,757 DEBUG   HandlerThread:91863 [system_info.py:_save_pip():67] Saving pip packages done
+2022-12-12 16:05:02,758 INFO    HandlerThread:91863 [system_monitor.py:probe():183] Finished publishing system info
+2022-12-12 16:05:02,768 DEBUG   SenderThread:91863 [sender.py:send():303] send: files
+2022-12-12 16:05:02,768 INFO    SenderThread:91863 [sender.py:_save_file():1171] saving file wandb-metadata.json with policy now
+2022-12-12 16:05:02,779 DEBUG   HandlerThread:91863 [handler.py:handle_request():139] handle_request: stop_status
+2022-12-12 16:05:02,780 DEBUG   SenderThread:91863 [sender.py:send_request():317] send_request: stop_status
+2022-12-12 16:05:03,160 DEBUG   SenderThread:91863 [sender.py:send():303] send: telemetry
+2022-12-12 16:05:03,277 INFO    Thread-13 :91863 [dir_watcher.py:_on_file_created():275] file/dir created: /Users/slavapirogov/pix2pix/wandb/run-20221212_160501-3bc39w9p/files/requirements.txt
+2022-12-12 16:05:03,278 INFO    Thread-13 :91863 [dir_watcher.py:_on_file_created():275] file/dir created: /Users/slavapirogov/pix2pix/wandb/run-20221212_160501-3bc39w9p/files/wandb-summary.json
+2022-12-12 16:05:03,278 INFO    Thread-13 :91863 [dir_watcher.py:_on_file_created():275] file/dir created: /Users/slavapirogov/pix2pix/wandb/run-20221212_160501-3bc39w9p/files/wandb-metadata.json
+2022-12-12 16:05:03,279 INFO    Thread-13 :91863 [dir_watcher.py:_on_file_created():275] file/dir created: /Users/slavapirogov/pix2pix/wandb/run-20221212_160501-3bc39w9p/files/output.log
+2022-12-12 16:05:03,743 INFO    Thread-16 :91863 [upload_job.py:push():143] Uploaded file /var/folders/mv/4srfnnv53bs0dtldb_0svy300000gn/T/tmpa4t0frv9wandb/dcjb7n3s-wandb-metadata.json
+2022-12-12 16:05:05,281 INFO    Thread-13 :91863 [dir_watcher.py:_on_file_modified():292] file/dir modified: /Users/slavapirogov/pix2pix/wandb/run-20221212_160501-3bc39w9p/files/output.log
+2022-12-12 16:05:18,164 DEBUG   HandlerThread:91863 [handler.py:handle_request():139] handle_request: stop_status
+2022-12-12 16:05:18,166 DEBUG   SenderThread:91863 [sender.py:send_request():317] send_request: stop_status
+2022-12-12 16:05:21,195 DEBUG   HandlerThread:91863 [handler.py:handle_request():139] handle_request: partial_history
+2022-12-12 16:05:23,344 INFO    Thread-13 :91863 [dir_watcher.py:_on_file_modified():292] file/dir modified: /Users/slavapirogov/pix2pix/wandb/run-20221212_160501-3bc39w9p/files/output.log
+2022-12-12 16:05:32,394 INFO    Thread-13 :91863 [dir_watcher.py:_on_file_modified():292] file/dir modified: /Users/slavapirogov/pix2pix/wandb/run-20221212_160501-3bc39w9p/files/config.yaml
+2022-12-12 16:05:33,517 DEBUG   HandlerThread:91863 [handler.py:handle_request():139] handle_request: stop_status
+2022-12-12 16:05:33,517 DEBUG   SenderThread:91863 [sender.py:send_request():317] send_request: stop_status
+2022-12-12 16:05:37,056 DEBUG   SenderThread:91863 [sender.py:send():303] send: exit
+2022-12-12 16:05:37,056 INFO    SenderThread:91863 [sender.py:send_exit():442] handling exit code: 1
+2022-12-12 16:05:37,057 INFO    SenderThread:91863 [sender.py:send_exit():444] handling runtime: 34
+2022-12-12 16:05:37,060 INFO    SenderThread:91863 [sender.py:_save_file():1171] saving file wandb-summary.json with policy end
+2022-12-12 16:05:37,060 INFO    SenderThread:91863 [sender.py:send_exit():450] send defer
+2022-12-12 16:05:37,061 DEBUG   HandlerThread:91863 [handler.py:handle_request():139] handle_request: defer
+2022-12-12 16:05:37,062 INFO    HandlerThread:91863 [handler.py:handle_request_defer():162] handle defer: 0
+2022-12-12 16:05:37,063 DEBUG   SenderThread:91863 [sender.py:send_request():317] send_request: defer
+2022-12-12 16:05:37,064 INFO    SenderThread:91863 [sender.py:send_request_defer():459] handle sender defer: 0
+2022-12-12 16:05:37,064 INFO    SenderThread:91863 [sender.py:transition_state():463] send defer: 1
+2022-12-12 16:05:37,065 DEBUG   HandlerThread:91863 [handler.py:handle_request():139] handle_request: defer
+2022-12-12 16:05:37,066 INFO    HandlerThread:91863 [handler.py:handle_request_defer():162] handle defer: 1
+2022-12-12 16:05:37,066 INFO    HandlerThread:91863 [system_monitor.py:finish():160] Stopping system monitor
+2022-12-12 16:05:37,087 DEBUG   SystemMonitor:91863 [system_monitor.py:_start():130] Starting system metrics aggregation loop
+2022-12-12 16:05:37,088 DEBUG   SystemMonitor:91863 [system_monitor.py:_start():137] Finished system metrics aggregation loop
+2022-12-12 16:05:37,089 DEBUG   SystemMonitor:91863 [system_monitor.py:_start():141] Publishing last batch of metrics
+2022-12-12 16:05:37,091 INFO    HandlerThread:91863 [interfaces.py:finish():173] Joined cpu
+2022-12-12 16:05:37,092 INFO    HandlerThread:91863 [interfaces.py:finish():173] Joined disk
+2022-12-12 16:05:37,092 INFO    HandlerThread:91863 [interfaces.py:finish():173] Joined memory
+2022-12-12 16:05:37,092 INFO    HandlerThread:91863 [interfaces.py:finish():173] Joined network
+2022-12-12 16:05:37,092 DEBUG   SenderThread:91863 [sender.py:send_request():317] send_request: defer
+2022-12-12 16:05:37,093 INFO    SenderThread:91863 [sender.py:send_request_defer():459] handle sender defer: 1
+2022-12-12 16:05:37,093 INFO    SenderThread:91863 [sender.py:transition_state():463] send defer: 2
+2022-12-12 16:05:37,094 DEBUG   SenderThread:91863 [sender.py:send():303] send: stats
+2022-12-12 16:05:37,095 DEBUG   HandlerThread:91863 [handler.py:handle_request():139] handle_request: defer
+2022-12-12 16:05:37,095 INFO    HandlerThread:91863 [handler.py:handle_request_defer():162] handle defer: 2
+2022-12-12 16:05:37,097 DEBUG   SenderThread:91863 [sender.py:send():303] send: history
+2022-12-12 16:05:37,098 DEBUG   SenderThread:91863 [sender.py:send():303] send: summary
+2022-12-12 16:05:37,099 INFO    SenderThread:91863 [sender.py:_save_file():1171] saving file wandb-summary.json with policy end
+2022-12-12 16:05:37,100 DEBUG   SenderThread:91863 [sender.py:send_request():317] send_request: defer
+2022-12-12 16:05:37,100 INFO    SenderThread:91863 [sender.py:send_request_defer():459] handle sender defer: 2
+2022-12-12 16:05:37,100 INFO    SenderThread:91863 [sender.py:transition_state():463] send defer: 3
+2022-12-12 16:05:37,100 DEBUG   HandlerThread:91863 [handler.py:handle_request():139] handle_request: defer
+2022-12-12 16:05:37,101 INFO    HandlerThread:91863 [handler.py:handle_request_defer():162] handle defer: 3
+2022-12-12 16:05:37,102 DEBUG   SenderThread:91863 [sender.py:send_request():317] send_request: defer
+2022-12-12 16:05:37,102 INFO    SenderThread:91863 [sender.py:send_request_defer():459] handle sender defer: 3
+2022-12-12 16:05:37,102 INFO    SenderThread:91863 [sender.py:transition_state():463] send defer: 4
+2022-12-12 16:05:37,103 DEBUG   HandlerThread:91863 [handler.py:handle_request():139] handle_request: defer
+2022-12-12 16:05:37,103 INFO    HandlerThread:91863 [handler.py:handle_request_defer():162] handle defer: 4
+2022-12-12 16:05:37,104 DEBUG   SenderThread:91863 [sender.py:send():303] send: summary
+2022-12-12 16:05:37,105 INFO    SenderThread:91863 [sender.py:_save_file():1171] saving file wandb-summary.json with policy end
+2022-12-12 16:05:37,106 DEBUG   SenderThread:91863 [sender.py:send_request():317] send_request: defer
+2022-12-12 16:05:37,106 INFO    SenderThread:91863 [sender.py:send_request_defer():459] handle sender defer: 4
+2022-12-12 16:05:37,106 INFO    SenderThread:91863 [sender.py:transition_state():463] send defer: 5
+2022-12-12 16:05:37,107 DEBUG   HandlerThread:91863 [handler.py:handle_request():139] handle_request: defer
+2022-12-12 16:05:37,107 INFO    HandlerThread:91863 [handler.py:handle_request_defer():162] handle defer: 5
+2022-12-12 16:05:37,108 DEBUG   SenderThread:91863 [sender.py:send_request():317] send_request: defer
+2022-12-12 16:05:37,108 INFO    SenderThread:91863 [sender.py:send_request_defer():459] handle sender defer: 5
+2022-12-12 16:05:37,108 INFO    SenderThread:91863 [sender.py:transition_state():463] send defer: 6
+2022-12-12 16:05:37,109 DEBUG   HandlerThread:91863 [handler.py:handle_request():139] handle_request: defer
+2022-12-12 16:05:37,109 INFO    HandlerThread:91863 [handler.py:handle_request_defer():162] handle defer: 6
+2022-12-12 16:05:37,109 DEBUG   SenderThread:91863 [sender.py:send_request():317] send_request: defer
+2022-12-12 16:05:37,110 INFO    SenderThread:91863 [sender.py:send_request_defer():459] handle sender defer: 6
+2022-12-12 16:05:37,417 INFO    Thread-13 :91863 [dir_watcher.py:_on_file_modified():292] file/dir modified: /Users/slavapirogov/pix2pix/wandb/run-20221212_160501-3bc39w9p/files/wandb-summary.json
+2022-12-12 16:05:38,064 DEBUG   HandlerThread:91863 [handler.py:handle_request():139] handle_request: poll_exit
+2022-12-12 16:05:39,239 INFO    SenderThread:91863 [sender.py:transition_state():463] send defer: 7
+2022-12-12 16:05:39,240 DEBUG   SenderThread:91863 [sender.py:send_request():317] send_request: poll_exit
+2022-12-12 16:05:39,242 DEBUG   HandlerThread:91863 [handler.py:handle_request():139] handle_request: defer
+2022-12-12 16:05:39,243 INFO    HandlerThread:91863 [handler.py:handle_request_defer():162] handle defer: 7
+2022-12-12 16:05:39,244 DEBUG   SenderThread:91863 [sender.py:send_request():317] send_request: defer
+2022-12-12 16:05:39,245 INFO    SenderThread:91863 [sender.py:send_request_defer():459] handle sender defer: 7
+2022-12-12 16:05:39,245 INFO    SenderThread:91863 [dir_watcher.py:finish():362] shutting down directory watcher
+2022-12-12 16:05:39,428 INFO    SenderThread:91863 [dir_watcher.py:_on_file_modified():292] file/dir modified: /Users/slavapirogov/pix2pix/wandb/run-20221212_160501-3bc39w9p/files/output.log
+2022-12-12 16:05:39,429 INFO    SenderThread:91863 [dir_watcher.py:finish():392] scan: /Users/slavapirogov/pix2pix/wandb/run-20221212_160501-3bc39w9p/files
+2022-12-12 16:05:39,429 INFO    SenderThread:91863 [dir_watcher.py:finish():406] scan save: /Users/slavapirogov/pix2pix/wandb/run-20221212_160501-3bc39w9p/files/requirements.txt requirements.txt
+2022-12-12 16:05:39,430 INFO    SenderThread:91863 [dir_watcher.py:finish():406] scan save: /Users/slavapirogov/pix2pix/wandb/run-20221212_160501-3bc39w9p/files/output.log output.log
+2022-12-12 16:05:39,437 INFO    SenderThread:91863 [dir_watcher.py:finish():406] scan save: /Users/slavapirogov/pix2pix/wandb/run-20221212_160501-3bc39w9p/files/config.yaml config.yaml
+2022-12-12 16:05:39,444 INFO    SenderThread:91863 [dir_watcher.py:finish():406] scan save: /Users/slavapirogov/pix2pix/wandb/run-20221212_160501-3bc39w9p/files/wandb-summary.json wandb-summary.json
+2022-12-12 16:05:39,445 INFO    SenderThread:91863 [dir_watcher.py:finish():406] scan save: /Users/slavapirogov/pix2pix/wandb/run-20221212_160501-3bc39w9p/files/wandb-metadata.json wandb-metadata.json
+2022-12-12 16:05:39,451 INFO    SenderThread:91863 [sender.py:transition_state():463] send defer: 8
+2022-12-12 16:05:39,465 DEBUG   HandlerThread:91863 [handler.py:handle_request():139] handle_request: defer
+2022-12-12 16:05:39,466 INFO    HandlerThread:91863 [handler.py:handle_request_defer():162] handle defer: 8
+2022-12-12 16:05:39,468 DEBUG   SenderThread:91863 [sender.py:send_request():317] send_request: defer
+2022-12-12 16:05:39,470 INFO    SenderThread:91863 [sender.py:send_request_defer():459] handle sender defer: 8
+2022-12-12 16:05:39,470 INFO    SenderThread:91863 [file_pusher.py:finish():168] shutting down file pusher
+2022-12-12 16:05:40,420 INFO    Thread-20 :91863 [upload_job.py:push():143] Uploaded file /Users/slavapirogov/pix2pix/wandb/run-20221212_160501-3bc39w9p/files/wandb-summary.json
+2022-12-12 16:05:40,421 INFO    Thread-18 :91863 [upload_job.py:push():143] Uploaded file /Users/slavapirogov/pix2pix/wandb/run-20221212_160501-3bc39w9p/files/output.log
+2022-12-12 16:05:40,429 INFO    Thread-19 :91863 [upload_job.py:push():143] Uploaded file /Users/slavapirogov/pix2pix/wandb/run-20221212_160501-3bc39w9p/files/config.yaml
+2022-12-12 16:05:40,441 INFO    Thread-17 :91863 [upload_job.py:push():143] Uploaded file /Users/slavapirogov/pix2pix/wandb/run-20221212_160501-3bc39w9p/files/requirements.txt
+2022-12-12 16:05:40,646 INFO    Thread-12 :91863 [sender.py:transition_state():463] send defer: 9
+2022-12-12 16:05:40,649 DEBUG   HandlerThread:91863 [handler.py:handle_request():139] handle_request: defer
+2022-12-12 16:05:40,650 INFO    HandlerThread:91863 [handler.py:handle_request_defer():162] handle defer: 9
+2022-12-12 16:05:40,650 DEBUG   SenderThread:91863 [sender.py:send_request():317] send_request: defer
+2022-12-12 16:05:40,651 INFO    SenderThread:91863 [sender.py:send_request_defer():459] handle sender defer: 9
+2022-12-12 16:05:40,651 INFO    SenderThread:91863 [file_pusher.py:join():173] waiting for file pusher
+2022-12-12 16:05:40,654 INFO    SenderThread:91863 [sender.py:transition_state():463] send defer: 10
+2022-12-12 16:05:40,657 DEBUG   HandlerThread:91863 [handler.py:handle_request():139] handle_request: defer
+2022-12-12 16:05:40,657 INFO    HandlerThread:91863 [handler.py:handle_request_defer():162] handle defer: 10
+2022-12-12 16:05:40,658 DEBUG   SenderThread:91863 [sender.py:send_request():317] send_request: defer
+2022-12-12 16:05:40,658 INFO    SenderThread:91863 [sender.py:send_request_defer():459] handle sender defer: 10
+2022-12-12 16:05:40,881 INFO    SenderThread:91863 [sender.py:transition_state():463] send defer: 11
+2022-12-12 16:05:40,881 DEBUG   HandlerThread:91863 [handler.py:handle_request():139] handle_request: defer
+2022-12-12 16:05:40,882 INFO    HandlerThread:91863 [handler.py:handle_request_defer():162] handle defer: 11
+2022-12-12 16:05:40,882 DEBUG   SenderThread:91863 [sender.py:send_request():317] send_request: defer
+2022-12-12 16:05:40,882 INFO    SenderThread:91863 [sender.py:send_request_defer():459] handle sender defer: 11
+2022-12-12 16:05:40,882 INFO    SenderThread:91863 [sender.py:transition_state():463] send defer: 12
+2022-12-12 16:05:40,883 DEBUG   SenderThread:91863 [sender.py:send():303] send: final
+2022-12-12 16:05:40,884 DEBUG   SenderThread:91863 [sender.py:send():303] send: footer
+2022-12-12 16:05:40,884 DEBUG   HandlerThread:91863 [handler.py:handle_request():139] handle_request: defer
+2022-12-12 16:05:40,884 INFO    HandlerThread:91863 [handler.py:handle_request_defer():162] handle defer: 12
+2022-12-12 16:05:40,884 DEBUG   SenderThread:91863 [sender.py:send_request():317] send_request: defer
+2022-12-12 16:05:40,884 INFO    SenderThread:91863 [sender.py:send_request_defer():459] handle sender defer: 12
+2022-12-12 16:05:40,886 DEBUG   HandlerThread:91863 [handler.py:handle_request():139] handle_request: poll_exit
+2022-12-12 16:05:40,886 DEBUG   SenderThread:91863 [sender.py:send_request():317] send_request: poll_exit
+2022-12-12 16:05:40,888 DEBUG   HandlerThread:91863 [handler.py:handle_request():139] handle_request: server_info
+2022-12-12 16:05:40,889 DEBUG   SenderThread:91863 [sender.py:send_request():317] send_request: server_info
+2022-12-12 16:05:40,895 DEBUG   HandlerThread:91863 [handler.py:handle_request():139] handle_request: get_summary
+2022-12-12 16:05:40,898 DEBUG   HandlerThread:91863 [handler.py:handle_request():139] handle_request: sampled_history
+2022-12-12 16:05:41,760 INFO    MainThread:91863 [wandb_run.py:_footer_history_summary_info():3377] rendering history
+2022-12-12 16:05:41,762 INFO    MainThread:91863 [wandb_run.py:_footer_history_summary_info():3409] rendering summary
+2022-12-12 16:05:41,763 INFO    MainThread:91863 [wandb_run.py:_footer_sync_info():3333] logging synced files
+2022-12-12 16:05:41,767 DEBUG   HandlerThread:91863 [handler.py:handle_request():139] handle_request: shutdown
+2022-12-12 16:05:41,768 INFO    HandlerThread:91863 [handler.py:finish():814] shutting down handler
+2022-12-12 16:05:41,888 INFO    WriterThread:91863 [datastore.py:close():279] close: /Users/slavapirogov/pix2pix/wandb/run-20221212_160501-3bc39w9p/run-3bc39w9p.wandb
+2022-12-12 16:05:42,762 INFO    SenderThread:91863 [sender.py:finish():1331] shutting down sender
+2022-12-12 16:05:42,762 INFO    SenderThread:91863 [file_pusher.py:finish():168] shutting down file pusher
+2022-12-12 16:05:42,762 INFO    SenderThread:91863 [file_pusher.py:join():173] waiting for file pusher
+2022-12-12 16:05:42,904 INFO    MainThread:91863 [internal.py:handle_exit():78] Internal process exited

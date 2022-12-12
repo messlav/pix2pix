@@ -1,0 +1,94 @@
+2022-12-12 16:01:13,512 INFO    StreamThr :91692 [internal.py:wandb_internal():88] W&B internal server running at pid: 91692, started at: 2022-12-12 16:01:13.507759
+2022-12-12 16:01:13,519 DEBUG   HandlerThread:91692 [handler.py:handle_request():139] handle_request: status
+2022-12-12 16:01:13,523 DEBUG   SenderThread:91692 [sender.py:send_request():317] send_request: status
+2022-12-12 16:01:13,525 DEBUG   SenderThread:91692 [sender.py:send():303] send: header
+2022-12-12 16:01:13,525 INFO    WriterThread:91692 [datastore.py:open_for_write():75] open: /Users/slavapirogov/pix2pix/wandb/run-20221212_160113-e6686lfh/run-e6686lfh.wandb
+2022-12-12 16:01:15,570 DEBUG   SenderThread:91692 [sender.py:send():303] send: exit
+2022-12-12 16:01:15,570 INFO    SenderThread:91692 [sender.py:send_exit():442] handling exit code: 1
+2022-12-12 16:01:15,571 INFO    SenderThread:91692 [sender.py:send_exit():444] handling runtime: 0
+2022-12-12 16:01:15,571 INFO    SenderThread:91692 [sender.py:_save_file():1171] saving file wandb-summary.json with policy end
+2022-12-12 16:01:15,571 INFO    SenderThread:91692 [sender.py:send_exit():450] send defer
+2022-12-12 16:01:15,572 DEBUG   HandlerThread:91692 [handler.py:handle_request():139] handle_request: defer
+2022-12-12 16:01:15,572 INFO    HandlerThread:91692 [handler.py:handle_request_defer():162] handle defer: 0
+2022-12-12 16:01:15,572 DEBUG   SenderThread:91692 [sender.py:send_request():317] send_request: defer
+2022-12-12 16:01:15,572 INFO    SenderThread:91692 [sender.py:send_request_defer():459] handle sender defer: 0
+2022-12-12 16:01:15,573 INFO    SenderThread:91692 [sender.py:transition_state():463] send defer: 1
+2022-12-12 16:01:15,573 DEBUG   HandlerThread:91692 [handler.py:handle_request():139] handle_request: defer
+2022-12-12 16:01:15,573 INFO    HandlerThread:91692 [handler.py:handle_request_defer():162] handle defer: 1
+2022-12-12 16:01:15,573 DEBUG   SenderThread:91692 [sender.py:send_request():317] send_request: defer
+2022-12-12 16:01:15,573 INFO    SenderThread:91692 [sender.py:send_request_defer():459] handle sender defer: 1
+2022-12-12 16:01:15,574 INFO    SenderThread:91692 [sender.py:transition_state():463] send defer: 2
+2022-12-12 16:01:15,574 DEBUG   HandlerThread:91692 [handler.py:handle_request():139] handle_request: defer
+2022-12-12 16:01:15,574 INFO    HandlerThread:91692 [handler.py:handle_request_defer():162] handle defer: 2
+2022-12-12 16:01:15,574 DEBUG   SenderThread:91692 [sender.py:send_request():317] send_request: defer
+2022-12-12 16:01:15,575 INFO    SenderThread:91692 [sender.py:send_request_defer():459] handle sender defer: 2
+2022-12-12 16:01:15,575 INFO    SenderThread:91692 [sender.py:transition_state():463] send defer: 3
+2022-12-12 16:01:15,575 DEBUG   HandlerThread:91692 [handler.py:handle_request():139] handle_request: defer
+2022-12-12 16:01:15,576 INFO    HandlerThread:91692 [handler.py:handle_request_defer():162] handle defer: 3
+2022-12-12 16:01:15,576 DEBUG   SenderThread:91692 [sender.py:send_request():317] send_request: defer
+2022-12-12 16:01:15,576 INFO    SenderThread:91692 [sender.py:send_request_defer():459] handle sender defer: 3
+2022-12-12 16:01:15,576 INFO    SenderThread:91692 [sender.py:transition_state():463] send defer: 4
+2022-12-12 16:01:15,577 DEBUG   HandlerThread:91692 [handler.py:handle_request():139] handle_request: defer
+2022-12-12 16:01:15,577 INFO    HandlerThread:91692 [handler.py:handle_request_defer():162] handle defer: 4
+2022-12-12 16:01:15,577 DEBUG   SenderThread:91692 [sender.py:send():303] send: summary
+2022-12-12 16:01:15,578 INFO    SenderThread:91692 [sender.py:_save_file():1171] saving file wandb-summary.json with policy end
+2022-12-12 16:01:15,579 DEBUG   SenderThread:91692 [sender.py:send_request():317] send_request: defer
+2022-12-12 16:01:15,580 INFO    SenderThread:91692 [sender.py:send_request_defer():459] handle sender defer: 4
+2022-12-12 16:01:15,580 INFO    SenderThread:91692 [sender.py:transition_state():463] send defer: 5
+2022-12-12 16:01:15,580 DEBUG   HandlerThread:91692 [handler.py:handle_request():139] handle_request: defer
+2022-12-12 16:01:15,580 INFO    HandlerThread:91692 [handler.py:handle_request_defer():162] handle defer: 5
+2022-12-12 16:01:15,581 DEBUG   SenderThread:91692 [sender.py:send_request():317] send_request: defer
+2022-12-12 16:01:15,581 INFO    SenderThread:91692 [sender.py:send_request_defer():459] handle sender defer: 5
+2022-12-12 16:01:15,581 INFO    SenderThread:91692 [sender.py:transition_state():463] send defer: 6
+2022-12-12 16:01:15,582 DEBUG   HandlerThread:91692 [handler.py:handle_request():139] handle_request: defer
+2022-12-12 16:01:15,582 INFO    HandlerThread:91692 [handler.py:handle_request_defer():162] handle defer: 6
+2022-12-12 16:01:15,582 DEBUG   SenderThread:91692 [sender.py:send_request():317] send_request: defer
+2022-12-12 16:01:15,582 INFO    SenderThread:91692 [sender.py:send_request_defer():459] handle sender defer: 6
+2022-12-12 16:01:15,582 INFO    SenderThread:91692 [sender.py:transition_state():463] send defer: 7
+2022-12-12 16:01:15,583 DEBUG   HandlerThread:91692 [handler.py:handle_request():139] handle_request: defer
+2022-12-12 16:01:15,583 INFO    HandlerThread:91692 [handler.py:handle_request_defer():162] handle defer: 7
+2022-12-12 16:01:15,584 DEBUG   SenderThread:91692 [sender.py:send_request():317] send_request: defer
+2022-12-12 16:01:15,584 INFO    SenderThread:91692 [sender.py:send_request_defer():459] handle sender defer: 7
+2022-12-12 16:01:15,584 INFO    SenderThread:91692 [sender.py:transition_state():463] send defer: 8
+2022-12-12 16:01:15,584 DEBUG   HandlerThread:91692 [handler.py:handle_request():139] handle_request: defer
+2022-12-12 16:01:15,584 INFO    HandlerThread:91692 [handler.py:handle_request_defer():162] handle defer: 8
+2022-12-12 16:01:15,585 DEBUG   SenderThread:91692 [sender.py:send_request():317] send_request: defer
+2022-12-12 16:01:15,585 INFO    SenderThread:91692 [sender.py:send_request_defer():459] handle sender defer: 8
+2022-12-12 16:01:15,585 INFO    SenderThread:91692 [sender.py:transition_state():463] send defer: 9
+2022-12-12 16:01:15,585 DEBUG   HandlerThread:91692 [handler.py:handle_request():139] handle_request: defer
+2022-12-12 16:01:15,585 INFO    HandlerThread:91692 [handler.py:handle_request_defer():162] handle defer: 9
+2022-12-12 16:01:15,586 DEBUG   SenderThread:91692 [sender.py:send_request():317] send_request: defer
+2022-12-12 16:01:15,586 INFO    SenderThread:91692 [sender.py:send_request_defer():459] handle sender defer: 9
+2022-12-12 16:01:15,586 INFO    SenderThread:91692 [sender.py:transition_state():463] send defer: 10
+2022-12-12 16:01:15,586 DEBUG   HandlerThread:91692 [handler.py:handle_request():139] handle_request: defer
+2022-12-12 16:01:15,586 INFO    HandlerThread:91692 [handler.py:handle_request_defer():162] handle defer: 10
+2022-12-12 16:01:15,586 DEBUG   SenderThread:91692 [sender.py:send_request():317] send_request: defer
+2022-12-12 16:01:15,587 INFO    SenderThread:91692 [sender.py:send_request_defer():459] handle sender defer: 10
+2022-12-12 16:01:15,587 INFO    SenderThread:91692 [sender.py:transition_state():463] send defer: 11
+2022-12-12 16:01:15,587 DEBUG   HandlerThread:91692 [handler.py:handle_request():139] handle_request: defer
+2022-12-12 16:01:15,587 INFO    HandlerThread:91692 [handler.py:handle_request_defer():162] handle defer: 11
+2022-12-12 16:01:15,587 DEBUG   SenderThread:91692 [sender.py:send_request():317] send_request: defer
+2022-12-12 16:01:15,587 INFO    SenderThread:91692 [sender.py:send_request_defer():459] handle sender defer: 11
+2022-12-12 16:01:15,587 INFO    SenderThread:91692 [sender.py:transition_state():463] send defer: 12
+2022-12-12 16:01:15,588 DEBUG   SenderThread:91692 [sender.py:send():303] send: final
+2022-12-12 16:01:15,589 DEBUG   SenderThread:91692 [sender.py:send():303] send: footer
+2022-12-12 16:01:15,589 DEBUG   HandlerThread:91692 [handler.py:handle_request():139] handle_request: defer
+2022-12-12 16:01:15,589 INFO    HandlerThread:91692 [handler.py:handle_request_defer():162] handle defer: 12
+2022-12-12 16:01:15,589 DEBUG   SenderThread:91692 [sender.py:send_request():317] send_request: defer
+2022-12-12 16:01:15,589 INFO    SenderThread:91692 [sender.py:send_request_defer():459] handle sender defer: 12
+2022-12-12 16:01:15,591 DEBUG   HandlerThread:91692 [handler.py:handle_request():139] handle_request: poll_exit
+2022-12-12 16:01:15,591 DEBUG   SenderThread:91692 [sender.py:send_request():317] send_request: poll_exit
+2022-12-12 16:01:15,592 DEBUG   HandlerThread:91692 [handler.py:handle_request():139] handle_request: poll_exit
+2022-12-12 16:01:15,592 DEBUG   SenderThread:91692 [sender.py:send_request():317] send_request: poll_exit
+2022-12-12 16:01:15,593 DEBUG   HandlerThread:91692 [handler.py:handle_request():139] handle_request: server_info
+2022-12-12 16:01:15,594 DEBUG   SenderThread:91692 [sender.py:send_request():317] send_request: server_info
+2022-12-12 16:01:15,600 DEBUG   HandlerThread:91692 [handler.py:handle_request():139] handle_request: get_summary
+2022-12-12 16:01:15,602 DEBUG   HandlerThread:91692 [handler.py:handle_request():139] handle_request: sampled_history
+2022-12-12 16:01:16,281 INFO    MainThread:91692 [wandb_run.py:_footer_history_summary_info():3377] rendering history
+2022-12-12 16:01:16,281 INFO    MainThread:91692 [wandb_run.py:_footer_history_summary_info():3409] rendering summary
+2022-12-12 16:01:16,281 INFO    MainThread:91692 [wandb_run.py:_footer_sync_info():3333] logging synced files
+2022-12-12 16:01:16,283 DEBUG   HandlerThread:91692 [handler.py:handle_request():139] handle_request: shutdown
+2022-12-12 16:01:16,283 INFO    HandlerThread:91692 [handler.py:finish():814] shutting down handler
+2022-12-12 16:01:16,593 INFO    WriterThread:91692 [datastore.py:close():279] close: /Users/slavapirogov/pix2pix/wandb/run-20221212_160113-e6686lfh/run-e6686lfh.wandb
+2022-12-12 16:01:17,285 INFO    SenderThread:91692 [sender.py:finish():1331] shutting down sender
+2022-12-12 16:01:17,529 INFO    MainThread:91692 [internal.py:handle_exit():78] Internal process exited

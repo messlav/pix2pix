@@ -1,0 +1,13 @@
+3
+nope
+/Users/slavapirogov/pix2pix/venv/lib/python3.9/site-packages/torch/cuda/amp/grad_scaler.py:118: UserWarning: torch.cuda.amp.GradScaler is enabled, but CUDA is not available.  Disabling.
+  warnings.warn("torch.cuda.amp.GradScaler is enabled, but CUDA is not available.  Disabling.")
+  0%|          | 1/8000 [00:18<40:50:46, 18.38s/it]/Users/slavapirogov/pix2pix/venv/lib/python3.9/site-packages/torch/amp/autocast_mode.py:202: UserWarning: User provided device_type of 'cuda', but CUDA is not available. Disabling
+  warnings.warn('User provided device_type of \'cuda\', but CUDA is not available. Disabling')
+Traceback (most recent call last):
+  File "/Users/slavapirogov/pix2pix/train.py", line 102, in <module>
+  File "/Users/slavapirogov/pix2pix/train.py", line 72, in main
+    scaler.step(optimizer)
+  File "/Users/slavapirogov/pix2pix/venv/lib/python3.9/site-packages/torch/nn/modules/module.py", line 1190, in _call_impl
+    return forward_call(*input, **kwargs)
+TypeError: forward() takes 2 positional arguments but 3 were given
