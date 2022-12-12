@@ -67,7 +67,7 @@ def main():
             )}, os.path.join(CheckpointConfig.save_path, 'checkpoint_%d.pth.tar' % epoch))
 
         # validate and wandb log
-        if epoch % CheckpointConfig.validate_epochs == 0:
+        if epoch % CheckpointConfig.validate_epochs == 0 or epoch == CheckpointConfig.num_epochs - 1:
             # add val images
             tgt_imgs, segm_imgs = next(iter(test_loader))
             tgt_imgs, segm_imgs = tgt_imgs.to(CheckpointConfig.device), segm_imgs.to(CheckpointConfig.device)
