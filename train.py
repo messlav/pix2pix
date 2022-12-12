@@ -46,14 +46,6 @@ def main(dataset: str):
                               shuffle=True, num_workers=checkpoint_config.n_workers, pin_memory=True)
     test_loader = DataLoader(test_dataset, batch_size=checkpoint_config.save_images,
                              shuffle=False, num_workers=checkpoint_config.n_workers, pin_memory=True)
-    imgs1, imgs2 = next(iter(train_dataset))
-    print(imgs1[0].shape, imgs2[0].shape)
-    print(torch.min(imgs1[0]), torch.max(imgs2[0]))
-    img0 = T.ToPILImage()(imgs1[0] * 0.5 + 0.5)
-    img0.show()
-    img1 = T.ToPILImage()(imgs2[1] * 0.5 + 0.5)
-    img1.show()
-    return
     # show_images(train_dataset, test_dataset)
     # model
     G = Generator(checkpoint_config.nc)
