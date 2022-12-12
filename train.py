@@ -1,4 +1,5 @@
 import torch
+import torch.nn as nn
 import os
 from tqdm import tqdm
 from torch.utils.data import DataLoader
@@ -15,6 +16,7 @@ from utils.wandb_writer import WanDBWriter
 def show_images(train_dataset, test_dataset):
     img = next(iter(train_dataset))
     print(img[0].shape, img[1].shape)
+    print(torch.min(img[0]), torch.max(img[0]))
     img0 = T.ToPILImage()(img[0])
     img0.show()
     img1 = T.ToPILImage()(img[1])
@@ -42,8 +44,12 @@ def main():
                               shuffle=True, num_workers=4, pin_memory=True)
     test_loader = DataLoader(test_dataset, batch_size=checkpoint_config.batch_size,
                              shuffle=False, num_workers=4, pin_memory=True)
+    # show_images(train_dataset, test_dataset)
     # model
     G = Generator(checkpoint_config.nc)
+    for p in G.parameters():
+        if p.dim() > 1:
+            nn.init.normal_(p, mean=0.0, std=0.02)
     G = G.to(checkpoint_config.device)
     # loss, optimizer and hyperparameters
     current_step = 0
@@ -89,9 +95,9 @@ def main():
                 fake = fake * 0.5 + 0.5  # denormalize?
 
             for q in range(CheckpointConfig.save_images):
-                logger.add_image('segmentation', segm_imgs[0].detach().cpu().permute(1, 2, 0).numpy())
-                logger.add_image('ground_true', tgt_imgs[0].detach().cpu().permute(1, 2, 0).numpy())
-                logger.add_image('prediction', fake[0].detach().cpu().permute(1, 2, 0).numpy())
+                logger.add_image(f'segmentation{q}', segm_imgs[0].detach().cpu().permute(1, 2, 0).numpy())
+                logger.add_image(f'ground_true{q}', tgt_imgs[0].detach().cpu().permute(1, 2, 0).numpy())
+                logger.add_image(f'prediction{q}', fake[0].detach().cpu().permute(1, 2, 0).numpy())
 
             G.train()
 

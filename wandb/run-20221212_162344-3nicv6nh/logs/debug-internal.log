@@ -227,3 +227,21 @@
 2022-12-12 16:28:17,088 INFO    SenderThread:92477 [sender.py:_save_file():1171] saving file wandb-summary.json with policy end
 2022-12-12 16:28:17,614 INFO    Thread-13 :92477 [dir_watcher.py:_on_file_modified():292] file/dir modified: /Users/slavapirogov/pix2pix/wandb/run-20221212_162344-3nicv6nh/files/wandb-summary.json
 2022-12-12 16:28:18,616 INFO    Thread-13 :92477 [dir_watcher.py:_on_file_modified():292] file/dir modified: /Users/slavapirogov/pix2pix/wandb/run-20221212_162344-3nicv6nh/files/output.log
+2022-12-12 16:28:24,158 DEBUG   HandlerThread:92477 [handler.py:handle_request():139] handle_request: stop_status
+2022-12-12 16:28:24,158 DEBUG   SenderThread:92477 [sender.py:send_request():317] send_request: stop_status
+2022-12-12 16:28:25,459 DEBUG   HandlerThread:92477 [handler.py:handle_request():139] handle_request: partial_history
+2022-12-12 16:28:25,463 DEBUG   HandlerThread:92477 [handler.py:handle_request():139] handle_request: partial_history
+2022-12-12 16:28:25,464 DEBUG   SenderThread:92477 [sender.py:send():303] send: history
+2022-12-12 16:28:25,464 DEBUG   SenderThread:92477 [sender.py:send():303] send: summary
+2022-12-12 16:28:25,465 INFO    SenderThread:92477 [sender.py:_save_file():1171] saving file wandb-summary.json with policy end
+2022-12-12 16:28:25,641 INFO    Thread-13 :92477 [dir_watcher.py:_on_file_modified():292] file/dir modified: /Users/slavapirogov/pix2pix/wandb/run-20221212_162344-3nicv6nh/files/wandb-summary.json
+2022-12-12 16:28:26,646 INFO    Thread-13 :92477 [dir_watcher.py:_on_file_modified():292] file/dir modified: /Users/slavapirogov/pix2pix/wandb/run-20221212_162344-3nicv6nh/files/output.log
+2022-12-12 16:28:33,276 DEBUG   HandlerThread:92477 [handler.py:handle_request():139] handle_request: partial_history
+2022-12-12 16:28:33,281 DEBUG   HandlerThread:92477 [handler.py:handle_request():139] handle_request: partial_history
+2022-12-12 16:28:33,282 DEBUG   SenderThread:92477 [sender.py:send():303] send: history
+2022-12-12 16:28:33,283 DEBUG   SenderThread:92477 [sender.py:send():303] send: summary
+2022-12-12 16:28:33,286 INFO    SenderThread:92477 [sender.py:_save_file():1171] saving file wandb-summary.json with policy end
+2022-12-12 16:28:33,670 INFO    Thread-13 :92477 [dir_watcher.py:_on_file_modified():292] file/dir modified: /Users/slavapirogov/pix2pix/wandb/run-20221212_162344-3nicv6nh/files/wandb-summary.json
+2022-12-12 16:28:34,675 INFO    Thread-13 :92477 [dir_watcher.py:_on_file_modified():292] file/dir modified: /Users/slavapirogov/pix2pix/wandb/run-20221212_162344-3nicv6nh/files/output.log
+2022-12-12 16:28:39,522 DEBUG   HandlerThread:92477 [handler.py:handle_request():139] handle_request: stop_status
+2022-12-12 16:28:39,522 DEBUG   SenderThread:92477 [sender.py:send_request():317] send_request: stop_status

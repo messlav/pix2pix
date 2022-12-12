@@ -10,8 +10,8 @@ class CheckpointConfig:
     num_epochs = 200
     save_epochs = 20
     validate_epochs = 1
-    save_images = 1
-    batch_size = 10
+    save_images = 3
+    batch_size = 1
     save_path = 'checkpoint_weights'
     optim = 'Adam'
     learning_rate = 2e-4

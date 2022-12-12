@@ -6,7 +6,7 @@ import torchvision.transforms as T
 class DatasetConfig:
     train_transforms = T.Compose([
         T.ToTensor(),
-        T.ColorJitter(),
+        # T.ColorJitter(),
         T.Resize((286, 286)),
         T.RandomCrop((256, 256)),
         T.Normalize(mean=(0.5, 0.5, 0.5), std=(0.5, 0.5, 0.5)),
