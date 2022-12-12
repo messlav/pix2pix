@@ -98,9 +98,9 @@ def main(dataset: str):
             for q in range(checkpoint_config.save_images):
                 # if q >= CheckpointConfig.batch_size:
                 #     break
-                logger.add_image(f'val/segmentation{q}', segm_imgs[q].detach().cpu().numpy())
-                logger.add_image(f'val/ground_true{q}', tgt_imgs[q].detach().cpu().numpy())
-                logger.add_image(f'val/prediction{q}', fake[q].detach().cpu().numpy())
+                logger.add_image(f'val/segmentation{q}', segm_imgs[q].detach().cpu().permute(1, 2, 0).numpy())
+                logger.add_image(f'val/ground_true{q}', tgt_imgs[q].detach().cpu().permute(1, 2, 0).numpy())
+                logger.add_image(f'val/prediction{q}', fake[q].detach().cpu().permute(1, 2, 0).numpy())
             # add train images
             tgt_imgs, segm_imgs = next(iter(train_loader))
             tgt_imgs, segm_imgs = tgt_imgs.to(checkpoint_config.device), segm_imgs.to(checkpoint_config.device)
