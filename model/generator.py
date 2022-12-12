@@ -7,8 +7,8 @@ class DownBlock(nn.Module):
         super(DownBlock, self).__init__()
         self.conv = nn.Conv2d(in_channels, out_channels, kernel_size=(4, 4),
                               stride=(2, 2), padding=(1, 1), bias=False, padding_mode='reflect')
-        # self.batch_norm = nn.BatchNorm2d(out_channels)
-        self.batch_norm = nn.InstanceNorm2d(out_channels, affine=True)  # might be better
+        self.batch_norm = nn.BatchNorm2d(out_channels)
+        # self.batch_norm = nn.InstanceNorm2d(out_channels, affine=True)  # might be better. or not :)
         self.activation = nn.LeakyReLU(0.2)
 
     def forward(self, x):
@@ -23,8 +23,8 @@ class UpBlock(nn.Module):
         super(UpBlock, self).__init__()
         self.conv = nn.ConvTranspose2d(in_channels, out_channels, kernel_size=(4, 4),
                                        stride=(2, 2), padding=(1, 1), bias=False, padding_mode='zeros')
-        # self.batch_norm = nn.BatchNorm2d(out_channels)
-        self.batch_norm = nn.InstanceNorm2d(out_channels, affine=True)  # might be better
+        self.batch_norm = nn.BatchNorm2d(out_channels)
+        # self.batch_norm = nn.InstanceNorm2d(out_channels, affine=True)  # might be better. or not :)
         self.dropout = nn.Dropout(0.5) if dropout else None
         self.activation = nn.ReLU()
 
@@ -103,7 +103,6 @@ class Generator(nn.Module):
         # print('up7', up7.shape)
         final = self.last_up(torch.cat([up7, d1], dim=1))
         # print('final', final.shape)
-
         return final
 
 

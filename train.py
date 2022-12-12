@@ -30,11 +30,6 @@ def main():
     # model
     G = Generator(checkpoint_config.nc)
     init_weights(G, checkpoint_config.mean, checkpoint_config.std)
-    # G.apply(init_func)
-    # for p in G.parameters():
-    #     print(p.__class__.__name__)
-    #     if p.dim() > 1:
-    #         nn.init.normal_(p, mean=0.0, std=0.02)
     G = G.to(checkpoint_config.device)
     # loss, optimizer and hyperparameters
     current_step = 0
@@ -92,7 +87,7 @@ def main():
             tgt_imgs, segm_imgs = tgt_imgs.to(CheckpointConfig.device), segm_imgs.to(CheckpointConfig.device)
             with torch.no_grad():
                 fake = G(segm_imgs)
-                fake = fake * 0.5 + 0.5  # denormalize?
+                fake = fake * 0.5 + 0.5
 
             for q in range(CheckpointConfig.save_images):
                 if q >= CheckpointConfig.batch_size:
