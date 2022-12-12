@@ -58,7 +58,7 @@ def main(dataset: str):
     os.makedirs(checkpoint_config.save_path, exist_ok=True)
     logger = WanDBWriter(checkpoint_config)
     logger.watch_model(G)
-    scaler = torch.cuda.amp.GradScaler()
+    # scaler = torch.cuda.amp.GradScaler()
     # train
     G.train()
     tqdm_bar = tqdm(total=checkpoint_config.num_epochs * len(train_loader) - current_step)
@@ -69,14 +69,17 @@ def main(dataset: str):
             logger.set_step(current_step)
 
             tgt_imgs, segm_imgs = tgt_imgs.to(checkpoint_config.device), segm_imgs.to(checkpoint_config.device)
-            with torch.cuda.amp.autocast():
-                fake = G(segm_imgs)
+            # with torch.cuda.amp.autocast():
+            #     fake = G(segm_imgs)
+            fake = G(segm_imgs)
 
             optimizer.zero_grad()
             loss = loss_fn(fake, tgt_imgs)
-            scaler.scale(loss).backward()
-            scaler.step(optimizer)
-            scaler.update()
+            loss.backward()
+            optimizer.step()
+            # scaler.scale(loss).backward()
+            # scaler.step(optimizer)
+            # scaler.update()
 
             logger.add_scalar('loss', loss.item())
 
