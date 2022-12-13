@@ -58,7 +58,7 @@ def main(dataset: str):
     os.makedirs(checkpoint_config.save_path, exist_ok=True)
     logger = WanDBWriter(checkpoint_config)
     logger.watch_model(G)
-    # scaler = torch.cuda.amp.GradScaler()
+    scaler = torch.cuda.amp.GradScaler()
     # train
     G.train()
     tqdm_bar = tqdm(total=checkpoint_config.num_epochs * len(train_loader) - current_step)
@@ -69,17 +69,17 @@ def main(dataset: str):
             logger.set_step(current_step)
 
             tgt_imgs, segm_imgs = tgt_imgs.to(checkpoint_config.device), segm_imgs.to(checkpoint_config.device)
-            # with torch.cuda.amp.autocast():
-            #     fake = G(segm_imgs)
-            fake = G(segm_imgs)
+            with torch.cuda.amp.autocast():
+                fake = G(segm_imgs)
+            # fake = G(segm_imgs)
 
             optimizer.zero_grad()
             loss = loss_fn(fake, tgt_imgs)
-            loss.backward()
-            optimizer.step()
-            # scaler.scale(loss).backward()
-            # scaler.step(optimizer)
-            # scaler.update()
+            # loss.backward()
+            # optimizer.step()
+            scaler.scale(loss).backward()
+            scaler.step(optimizer)
+            scaler.update()
 
             logger.add_scalar('loss', loss.item())
 
@@ -99,11 +99,11 @@ def main(dataset: str):
 
             for q in range(checkpoint_config.save_images):
                 logger.add_image(f'val/segmentation{q}',
-                                 segm_imgs[q].detach().cpu().permute(1, 2, 0).numpy())
+                                 segm_imgs[q].detach().cpu().permute(1, 2, 0).numpy() * 0.5 + 0.5)
                 logger.add_image(f'val/ground_true{q}',
-                                 tgt_imgs[q].detach().cpu().permute(1, 2, 0).numpy())
+                                 tgt_imgs[q].detach().cpu().permute(1, 2, 0).numpy() * 0.5 + 0.5)
                 logger.add_image(f'val/prediction{q}',
-                                 fake[q].detach().cpu().permute(1, 2, 0).numpy())
+                                 fake[q].detach().cpu().permute(1, 2, 0).numpy() * 0.5 + 0.5)
             # add train images
             tgt_imgs, segm_imgs = next(iter(train_loader))
             tgt_imgs, segm_imgs = tgt_imgs.to(checkpoint_config.device), segm_imgs.to(checkpoint_config.device)
@@ -114,11 +114,11 @@ def main(dataset: str):
                 if q >= checkpoint_config.batch_size:
                     break
                 logger.add_image(f'train/segmentation{q}',
-                                 segm_imgs[q].detach().cpu().permute(1, 2, 0).numpy())
+                                 segm_imgs[q].detach().cpu().permute(1, 2, 0).numpy() * 0.5 + 0.5)
                 logger.add_image(f'train/ground_true{q}',
-                                 tgt_imgs[q].detach().cpu().permute(1, 2, 0).numpy())
+                                 tgt_imgs[q].detach().cpu().permute(1, 2, 0).numpy() * 0.5 + 0.5)
                 logger.add_image(f'train/prediction{q}',
-                                 fake[q].detach().cpu().permute(1, 2, 0).numpy())
+                                 fake[q].detach().cpu().permute(1, 2, 0).numpy() * 0.5 + 0.5)
             G.train()
 
     torch.save({'Generator': G.state_dict(), 'optimizer': optimizer.state_dict()},
