@@ -10,7 +10,6 @@ from configs.checkpoint_maps_config import CheckpointMapsConfig
 from configs.dataset_facades_config import DatasetFacadesConfig
 from configs.dataset_maps_config import DatasetMapsConfig
 from model.generator import Generator
-from model.discriminator import Discriminator
 from datasets.facades import FacadesDataset
 from datasets.maps import Maps
 from loss.l1_loss import l1_loss
@@ -49,28 +48,19 @@ def main(dataset: str):
     # show_images(train_dataset, test_dataset)
     # model
     G = Generator(checkpoint_config.nc)
-    # init_weights(G, checkpoint_config.mean, checkpoint_config.std)  # made it automatically
+    init_weights(G, checkpoint_config.mean, checkpoint_config.std)
     G = G.to(checkpoint_config.device)
-
-    D = Discriminator(checkpoint_config.nc)
-    # init_weights(D, checkpoint_config.mean, checkpoint_config.std)  # made it automatically
-    D = D.to(checkpoint_config.device)
     # loss, optimizer and hyperparameters
     current_step = 0
-    loss_l1 = nn.L1Loss()
-    gan_loss = nn.BCEWithLogitsLoss()  # TODO: make own loss
-    optimizer_G = torch.optim.Adam(G.parameters(), lr=checkpoint_config.learning_rate,
-                                   betas=(checkpoint_config.beta1, checkpoint_config.beta2))
-    optimizer_D = torch.optim.Adam(G.parameters(), lr=checkpoint_config.learning_rate,
-                                   betas=(checkpoint_config.beta1, checkpoint_config.beta2))
-    scaler_G = torch.cuda.amp.GradScaler()
-    scaler_D = torch.cuda.amp.GradScaler()
+    loss_fn = nn.L1Loss()
+    optimizer = torch.optim.Adam(G.parameters(), lr=checkpoint_config.learning_rate,
+                                 betas=(checkpoint_config.beta1, checkpoint_config.beta2))
     os.makedirs(checkpoint_config.save_path, exist_ok=True)
     logger = WanDBWriter(checkpoint_config)
     logger.watch_model(G)
+    scaler = torch.cuda.amp.GradScaler()
     # train
     G.train()
-    D.train()
     tqdm_bar = tqdm(total=checkpoint_config.num_epochs * len(train_loader) - current_step)
     for epoch in range(checkpoint_config.num_epochs):
         for i, (tgt_imgs, segm_imgs) in enumerate(train_loader):
@@ -79,42 +69,23 @@ def main(dataset: str):
             logger.set_step(current_step)
 
             tgt_imgs, segm_imgs = tgt_imgs.to(checkpoint_config.device), segm_imgs.to(checkpoint_config.device)
-            # Discriminator
             with torch.cuda.amp.autocast():
                 fake = G(segm_imgs)
-                net_D_real = D(segm_imgs, tgt_imgs)
-                net_D_fake = D(segm_imgs, fake.detach())
-                D_real_loss = gan_loss(net_D_real, torch.ones_like(net_D_real))
-                D_fake_loss = gan_loss(net_D_fake, torch.zeros_like(net_D_real))
-                D_loss = D_real_loss + D_fake_loss
+            # fake = G(segm_imgs)
 
-            optimizer_D.zero_grad()
-            scaler_D.scale(D_loss).backward()
-            scaler_D.step(optimizer_D)
-            scaler_D.update()
+            optimizer.zero_grad()
+            loss = loss_fn(fake, tgt_imgs)
+            # loss.backward()
+            # optimizer.step()
+            scaler.scale(loss).backward()
+            scaler.step(optimizer)
+            scaler.update()
 
-            # Generator
-            with torch.cuda.amp.autocast():
-                net_D_fake = D(segm_imgs, fake)
-                G_fake_loss = gan_loss(net_D_fake, torch.ones_like(net_D_fake))
-                l1 = loss_l1(fake, tgt_imgs) * checkpoint_config.lambda_l1
-                G_loss = G_fake_loss + l1
+            logger.add_scalar('loss', loss.item())
 
-            optimizer_G.zero_grad()
-            scaler_G.scale(G_loss).backward()
-            scaler_G.step(optimizer_G)
-            scaler_G.update()
-
-            logger.add_scalar('discriminator_loss', D_loss.item())
-            logger.add_scalar('generator_loss', G_loss.item())
-            logger.add_scalar('l1_loss', l1.item())
-            logger.add_scalar('gan_loss', G_fake_loss.item())
-            logger.add_scalar('discriminator_real_loss', D_real_loss.item())
-            logger.add_scalar('discriminator_fake_loss', D_fake_loss.item())
-
-        # save G
+        # save model
         if epoch != 0 and epoch % checkpoint_config.save_epochs == 0:
-            torch.save({'Generator': G.state_dict(), 'optimizer': optimizer_G.state_dict(
+            torch.save({'Generator': G.state_dict(), 'optimizer': optimizer.state_dict(
             )}, os.path.join(checkpoint_config.save_path, 'checkpoint_%d.pth.tar' % epoch))
 
         # validate and wandb log
@@ -150,7 +121,7 @@ def main(dataset: str):
                                  fake[q].detach().cpu().permute(1, 2, 0).numpy() * 0.5 + 0.5)
             G.train()
 
-    torch.save({'Generator': G.state_dict(), 'optimizer': optimizer_G.state_dict()},
+    torch.save({'Generator': G.state_dict(), 'optimizer': optimizer.state_dict()},
                os.path.join(checkpoint_config.save_path, 'checkpoint_last.pth.tar'))
 
 

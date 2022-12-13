@@ -20,3 +20,4 @@ class CheckpointFacadesConfig:
     beta2 = 0.999
     mean = 0
     std = 0.02
+    lambda_l1 = 100

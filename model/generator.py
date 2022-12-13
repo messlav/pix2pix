@@ -68,6 +68,12 @@ class Generator(nn.Module):
             nn.Tanh()
         )  # 3 x 128 x 128
 
+    def initialize(self):
+        for m in self.modules():
+            if isinstance(m, (nn.Conv2d, nn.ConvTranspose2d, nn.Linear)):
+                torch.nn.init.normal_(m.weight, std=0.02)
+                torch.nn.init.zeros_(m.bias)
+
     def forward(self, x):
         # print('x', x.shape)
         d1 = self.first_down(x)
