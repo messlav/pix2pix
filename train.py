@@ -15,10 +15,11 @@ from datasets.facades import FacadesDataset
 from datasets.maps import Maps
 from loss.l1_loss import l1_loss
 from utils.wandb_writer import WanDBWriter
-from utils.utils import show_images, init_weights
+from utils.utils import show_images, init_weights, set_random_seed
 
 
 def main(dataset: str):
+    set_random_seed(3407)
     if dataset == 'facades':
         # configs
         checkpoint_config = CheckpointFacadesConfig()
@@ -46,7 +47,6 @@ def main(dataset: str):
                               shuffle=True, num_workers=checkpoint_config.n_workers, pin_memory=True)
     test_loader = DataLoader(test_dataset, batch_size=checkpoint_config.save_images,
                              shuffle=False, num_workers=checkpoint_config.n_workers, pin_memory=True)
-    # show_images(train_dataset, test_dataset)
     # model
     G = Generator(checkpoint_config.nc)
     # init_weights(G, checkpoint_config.mean, checkpoint_config.std)  # made it automatically

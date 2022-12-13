@@ -33,3 +33,9 @@ def init_weights(net, mean, std):
             init.constant_(m.bias.data, mean)
 
     net.apply(init_func)
+
+
+def set_random_seed(seed):
+    torch.backends.cudnn.deterministic = True
+    torch.manual_seed(seed)
+    torch.cuda.manual_seed(seed)
