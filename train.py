@@ -61,7 +61,7 @@ def main(dataset: str):
     gan_loss = nn.BCEWithLogitsLoss()  # TODO: make own loss
     optimizer_G = torch.optim.Adam(G.parameters(), lr=checkpoint_config.learning_rate,
                                    betas=(checkpoint_config.beta1, checkpoint_config.beta2))
-    optimizer_D = torch.optim.Adam(G.parameters(), lr=checkpoint_config.learning_rate,
+    optimizer_D = torch.optim.Adam(D.parameters(), lr=checkpoint_config.learning_rate,
                                    betas=(checkpoint_config.beta1, checkpoint_config.beta2))
     scaler_G = torch.cuda.amp.GradScaler()
     scaler_D = torch.cuda.amp.GradScaler()
