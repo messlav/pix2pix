@@ -55,15 +55,10 @@ def main(dataset: str):
         raise NotImplementedError
     # show_images(train_dataset, test_dataset)
     train_loader = DataLoader(train_dataset, batch_size=checkpoint_config.batch_size,
-                              shuffle=True, num_workers=4, pin_memory=True)
+                              shuffle=True, num_workers=checkpoint_config.n_workers, pin_memory=True)
     test_loader = DataLoader(test_dataset, batch_size=checkpoint_config.save_images,
-                             shuffle=False, num_workers=4, pin_memory=True)
+                             shuffle=False, num_workers=checkpoint_config.n_workers, pin_memory=True)
     # show_images(train_dataset, test_dataset)
-    for i, batch in enumerate(iter(test_loader)):
-        print(i)
-    # batch = next(iter(train_loader))
-    # print(batch[0].shape, batch[1].shape)
-    return
     # model
     G = Generator(checkpoint_config.nc)
     # init_weights(G, checkpoint_config.mean, checkpoint_config.std)
