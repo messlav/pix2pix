@@ -33,8 +33,8 @@ class FacadesDataset(Dataset):
 
         tgt_img = T.ToTensor()(Image.open(tgt_path))
         segm_img = T.ToTensor()(Image.open(segm_path))
-        print(tgt_img.shape, segm_img.shape)
-        print(torch.stack([tgt_img, segm_img]).shape)
+        # print(tgt_img.shape, segm_img.shape)
+        # print(torch.stack([tgt_img, segm_img]).shape)
         if self.transforms is not None:
             tgt_img, segm_img = self.transforms(torch.stack([tgt_img, segm_img]))
         # tgt_img = self.transforms(Image.open(tgt_path))
@@ -46,6 +46,7 @@ class FacadesDataset(Dataset):
 def test():
     dataset = FacadesDataset('../data/facades', 'train', DatasetFacadesConfig.train_transforms)
     img = next(iter(dataset))
+    print(type(img[0]), type(img[1]))
     print(img[0].shape, img[1].shape)
     img0 = T.ToPILImage()(img[0] * 0.5 + 0.5)
     img0.show()

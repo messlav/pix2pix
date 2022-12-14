@@ -13,7 +13,7 @@ class CheckpointFlagsConfig:
     validate_epochs = 10
     save_images = 3
     batch_size = 1
-    save_path = 'weights_flags'
+    save_path = 'weights_flags_gan'
     optim = 'Adam'
     learning_rate = 2e-4
     beta1 = 0.5

@@ -1,8 +1,9 @@
-import pandas as pd
 import os
 from PIL import Image
+import torch
 from torch.utils.data import Dataset
 import torchvision.transforms as T
+from configs.dataset_maps_config import DatasetMapsConfig
 
 
 class Maps(Dataset):
@@ -25,19 +26,18 @@ class Maps(Dataset):
         tgt_img = img[:, :, 600:]
 
         if self.transforms:
-            input_img = self.transforms(input_img)
-            tgt_img = self.transforms(tgt_img)
+            tgt_img, input_img = self.transforms(torch.stack([tgt_img, input_img]))
 
         return tgt_img, input_img
 
 
 def test():
-    dataset = Maps('../data/maps', 'train')
+    dataset = Maps('../data/maps', 'train', DatasetMapsConfig.train_transforms)
     img = next(iter(dataset))
     print(img[0].shape, img[1].shape)
-    img0 = T.ToPILImage()(img[0])
+    img0 = T.ToPILImage()(img[0] * 0.5 + 0.5)
     img0.show()
-    img1 = T.ToPILImage()(img[1])
+    img1 = T.ToPILImage()(img[1] * 0.5 + 0.5)
     img1.show()
 
 

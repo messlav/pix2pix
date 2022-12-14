@@ -1,7 +1,9 @@
 import os
 from PIL import Image
+import torch
 from torch.utils.data import Dataset
 import torchvision.transforms as T
+from configs.dataset_flags_config import DatasetFlagsConfig
 
 
 class Flags(Dataset):
@@ -22,19 +24,24 @@ class Flags(Dataset):
 
         img = Image.open(file_path)
         img_bw = img.convert('1')
-        input_img = self.transforms(img_bw)
-        tgt_img = self.transforms(img)
-        input_img = input_img.repeat(3, 1, 1)
-        return tgt_img, input_img
+
+        img = T.ToTensor()(img)
+        img_bw = T.ToTensor()(img_bw)
+
+        img_bw = img_bw.repeat(3, 1, 1)
+        if self.transforms:
+            img, img_bw = self.transforms(torch.stack([img, img_bw]))
+
+        return img, img_bw
 
 
 def test():
-    dataset = Flags('../create_flags_dataset/flags/rgb')
+    dataset = Flags('../create_flags_dataset/flags/rgb', DatasetFlagsConfig.train_transforms)
     img = next(iter(dataset))
     print(img[0].shape, img[1].shape)
-    img0 = T.ToPILImage()(img[0])
+    img0 = T.ToPILImage()(img[0] * 0.5 + 0.5)
     img0.show()
-    img1 = T.ToPILImage()(img[1])
+    img1 = T.ToPILImage()(img[1] * 0.5 + 0.5)
     img1.show()
 
 
