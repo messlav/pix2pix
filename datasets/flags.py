@@ -7,10 +7,11 @@ from configs.dataset_flags_config import DatasetFlagsConfig
 
 
 class Flags(Dataset):
-    def __init__(self, dir_name: str, img_transforms=None):
+    def __init__(self, dir_name: str, split='train', img_transforms=None):
         self.dir_name = dir_name
+        self.split = split
         self.transforms = img_transforms
-        self.list_files = os.listdir(dir_name)
+        self.list_files = os.listdir(dir_name + '/' + split)
         self.transforms = img_transforms
         if self.transforms is None:
             self.transforms = T.ToTensor()
@@ -20,7 +21,7 @@ class Flags(Dataset):
 
     def __getitem__(self, index):
         file = self.list_files[index]
-        file_path = os.path.join(self.dir_name, file)
+        file_path = os.path.join(self.dir_name + '/' + self.split, file)
 
         img = Image.open(file_path)
         img_bw = img.convert('1')
@@ -38,7 +39,7 @@ class Flags(Dataset):
 
 
 def test():
-    dataset = Flags('../data/flags/rgb', DatasetFlagsConfig.train_transforms)
+    dataset = Flags('../data/flags', 'val', DatasetFlagsConfig.train_transforms)
     img = next(iter(dataset))
     print(img[0].shape, img[1].shape)
     img0 = T.ToPILImage()(img[0] * 0.5 + 0.5)
@@ -48,7 +49,7 @@ def test():
 
 
 def test2():
-    dataset = Flags('../data/flags/rgb', DatasetFlagsConfig.train_transforms)
+    dataset = Flags('../data/flags', 'train', DatasetFlagsConfig.train_transforms)
     for i, img in enumerate(iter(dataset)):
         pass
     print('all')

@@ -51,8 +51,8 @@ def main(dataset: str):
         # data
         train_transforms = dataset_config.train_transforms
         test_transforms = dataset_config.train_transforms
-        train_dataset = Flags('data/flags/rgb', train_transforms)
-        test_dataset = Flags('data/flags/rgb', test_transforms)
+        train_dataset = Flags('data/flags', 'train', train_transforms)
+        test_dataset = Flags('data/flags', 'val', test_transforms)
     else:
         raise NotImplementedError
     # show_images(train_dataset, test_dataset)

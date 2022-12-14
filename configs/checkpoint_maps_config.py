@@ -13,10 +13,11 @@ class CheckpointMapsConfig:
     validate_epochs = 10
     save_images = 3
     batch_size = 1
-    save_path = 'weights_maps_l1'
+    save_path = 'weights_maps_gan'
     optim = 'Adam'
     learning_rate = 2e-4
     beta1 = 0.5
     beta2 = 0.999
     mean = 0
     std = 0.02
+    lambda_l1 = 100
