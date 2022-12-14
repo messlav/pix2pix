@@ -1,8 +1,10 @@
 import pandas as pd
 import os
 from PIL import Image
+import torch
 from torch.utils.data import Dataset
 import torchvision.transforms as T
+from configs.dataset_facades_config import DatasetFacadesConfig
 
 
 class FacadesDataset(Dataset):
@@ -10,8 +12,8 @@ class FacadesDataset(Dataset):
         self.dir_name = dir_name
         self.split = split
         self.transforms = img_transforms
-        if self.transforms is None:
-            self.transforms = T.ToTensor()
+        # if self.transforms is None:
+        #     self.transforms = T.ToTensor()
 
         meta = pd.read_csv(os.path.join(self.dir_name, 'metadata.csv'))
         meta = meta[meta.split == split]
@@ -29,19 +31,25 @@ class FacadesDataset(Dataset):
         tgt_path = os.path.join(self.dir_name, tgt_path.replace('B', 'A'))
         segm_path = os.path.join(self.dir_name, segm_path.replace('A', 'B'))
 
-        tgt_img = self.transforms(Image.open(tgt_path))
-        segm_img = self.transforms(Image.open(segm_path))
+        tgt_img = T.ToTensor()(Image.open(tgt_path))
+        segm_img = T.ToTensor()(Image.open(segm_path))
+        print(tgt_img.shape, segm_img.shape)
+        print(torch.stack([tgt_img, segm_img]).shape)
+        if self.transforms is not None:
+            tgt_img, segm_img = self.transforms(torch.stack([tgt_img, segm_img]))
+        # tgt_img = self.transforms(Image.open(tgt_path))
+        # segm_img = self.transforms(Image.open(segm_path))
 
         return tgt_img, segm_img
 
 
 def test():
-    dataset = FacadesDataset('../data', 'train')
+    dataset = FacadesDataset('../data/facades', 'train', DatasetFacadesConfig.train_transforms)
     img = next(iter(dataset))
     print(img[0].shape, img[1].shape)
-    img0 = T.ToPILImage()(img[0])
+    img0 = T.ToPILImage()(img[0] * 0.5 + 0.5)
     img0.show()
-    img1 = T.ToPILImage()(img[1])
+    img1 = T.ToPILImage()(img[1] * 0.5 + 0.5)
     img1.show()
 
 

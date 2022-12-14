@@ -13,7 +13,7 @@ class CheckpointFacadesConfig:
     validate_epochs = 10
     save_images = 3
     batch_size = 1
-    save_path = 'checkpoint_weights'
+    save_path = 'checkpoint_weights_facades_l1'
     optim = 'Adam'
     learning_rate = 2e-4
     beta1 = 0.5
