@@ -26,6 +26,8 @@ class Flags(Dataset):
         img_bw = img.convert('1')
 
         img = T.ToTensor()(img)
+        if img.shape[0] != 3:
+            print('delete this file please', file_path)
         img_bw = T.ToTensor()(img_bw)
 
         img_bw = img_bw.repeat(3, 1, 1)
@@ -36,7 +38,7 @@ class Flags(Dataset):
 
 
 def test():
-    dataset = Flags('../create_flags_dataset/flags/rgb', DatasetFlagsConfig.train_transforms)
+    dataset = Flags('../data/flags/rgb', DatasetFlagsConfig.train_transforms)
     img = next(iter(dataset))
     print(img[0].shape, img[1].shape)
     img0 = T.ToPILImage()(img[0] * 0.5 + 0.5)
@@ -45,5 +47,12 @@ def test():
     img1.show()
 
 
+def test2():
+    dataset = Flags('../data/flags/rgb', DatasetFlagsConfig.train_transforms)
+    for i, img in enumerate(iter(dataset)):
+        pass
+    print('all')
+
+
 if __name__ == '__main__':
-    test()
+    test2()
