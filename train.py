@@ -7,12 +7,15 @@ import torch.nn as nn
 
 from configs.checkpoint_facades_config import CheckpointFacadesConfig
 from configs.checkpoint_maps_config import CheckpointMapsConfig
+from configs.train_flags_config import TrainFlagsConfig
 from configs.dataset_facades_config import DatasetFacadesConfig
 from configs.dataset_maps_config import DatasetMapsConfig
+from configs.dataset_flags_config import DatasetFlagsConfig
 from model.generator import Generator
 from model.discriminator import Discriminator
 from datasets.facades import FacadesDataset
 from datasets.maps import Maps
+from datasets.flags import Flags
 from loss.l1_loss import l1_loss
 from utils.wandb_writer import WanDBWriter
 from utils.utils import show_images, init_weights, set_random_seed
@@ -40,6 +43,16 @@ def main(dataset: str):
         test_transforms = dataset_config.train_transforms
         train_dataset = Maps('data/maps', 'train', train_transforms)
         test_dataset = Maps('data/maps', 'val', test_transforms)
+    elif dataset == 'flags':
+        # configs
+        checkpoint_config = TrainFlagsConfig()
+        dataset_config = DatasetFlagsConfig()
+        print('using', checkpoint_config.device)
+        # data
+        train_transforms = dataset_config.train_transforms
+        test_transforms = dataset_config.train_transforms
+        train_dataset = Flags('data/flags/rgb', train_transforms)
+        test_dataset = Flags('data/flags/rgb', test_transforms)
     else:
         raise NotImplementedError
     # show_images(train_dataset, test_dataset)
@@ -157,6 +170,6 @@ def main(dataset: str):
 if __name__ == '__main__':
     parser = ArgumentParser()
     parser.add_argument(
-        "--dataset", type=str, default='facades', help="dataset. 'maps' or 'facades'")
+        "--dataset", type=str, default='facades', help="dataset. 'maps' or 'facades' or 'flags'")
     args = parser.parse_args()
     main(args.dataset)

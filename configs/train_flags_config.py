@@ -3,7 +3,7 @@ import torch
 
 
 @dataclass
-class CheckpointFlagsConfig:
+class TrainFlagsConfig:
     wandb_project = 'pix2pix'
     device = 'cuda:0' if torch.cuda.is_available() else 'cpu'
     nc = 3
