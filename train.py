@@ -8,6 +8,7 @@ import torch.nn as nn
 from configs.checkpoint_facades_config import CheckpointFacadesConfig
 from configs.checkpoint_maps_config import CheckpointMapsConfig
 from configs.train_flags_config import TrainFlagsConfig
+from configs.train_flags_1d_config import TrainFlags1DConfig
 from configs.dataset_facades_config import DatasetFacadesConfig
 from configs.dataset_maps_config import DatasetMapsConfig
 from configs.dataset_flags_config import DatasetFlagsConfig
@@ -16,6 +17,7 @@ from model.discriminator import Discriminator
 from datasets.facades import FacadesDataset
 from datasets.maps import Maps
 from datasets.flags import Flags
+from datasets.flags_1d import Flags1D
 from loss.l1_loss import l1_loss
 from utils.wandb_writer import WanDBWriter
 from utils.utils import show_images, init_weights, set_random_seed
@@ -46,6 +48,16 @@ def main(dataset: str):
     elif dataset == 'flags':
         # configs
         checkpoint_config = TrainFlagsConfig()
+        dataset_config = DatasetFlagsConfig()
+        print('using', checkpoint_config.device)
+        # data
+        train_transforms = dataset_config.train_transforms
+        test_transforms = dataset_config.test_transforms
+        train_dataset = Flags1D('data/flags', 'train', train_transforms)
+        test_dataset = Flags1D('data/flags', 'val', test_transforms)
+    elif dataset == 'flags_1d':
+        # configs
+        checkpoint_config = TrainFlags1DConfig()
         dataset_config = DatasetFlagsConfig()
         print('using', checkpoint_config.device)
         # data

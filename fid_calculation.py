@@ -18,7 +18,7 @@ def calc_fid(G: Generator, dataset: str = 'facades', device: str = 'cuda:0'):
     elif dataset == 'maps':
         test_dataset = Maps('data/maps', 'val', DatasetMapsConfig.test_transforms)
     elif dataset == 'flags':
-        test_dataset = Maps('data/flags', 'val', DatasetFlagsConfig.test_transforms)
+        test_dataset = Flags('data/flags', 'val', DatasetFlagsConfig.test_transforms)
     else:
         raise NotImplementedError
     test_loader = DataLoader(test_dataset, batch_size=32, shuffle=False,
@@ -41,7 +41,10 @@ def calc_fid(G: Generator, dataset: str = 'facades', device: str = 'cuda:0'):
 
 
 def main(G_path: str, dataset: str):
-    G = Generator(3)
+    nc = 3
+    if dataset == 'flags_1d':
+        nc = 1
+    G = Generator(nc)
     G.load_state_dict(torch.load(G_path)['Generator'])
     device = 'cuda:0'
     G.to(device)
