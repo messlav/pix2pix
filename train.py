@@ -73,11 +73,11 @@ def main(dataset: str):
     test_loader = DataLoader(test_dataset, batch_size=checkpoint_config.save_images,
                              shuffle=False, num_workers=checkpoint_config.n_workers, pin_memory=True)
     # model
-    G = Generator(checkpoint_config.nc)
+    G = Generator(checkpoint_config.nc_in)
     # init_weights(G, checkpoint_config.mean, checkpoint_config.std)  # made it automatically
     G = G.to(checkpoint_config.device)
 
-    D = Discriminator(checkpoint_config.nc)
+    D = Discriminator(checkpoint_config.nc_out)
     # init_weights(D, checkpoint_config.mean, checkpoint_config.std)  # made it automatically
     D = D.to(checkpoint_config.device)
     # loss, optimizer and hyperparameters

@@ -6,7 +6,8 @@ import torch
 class TrainFlags1DConfig:
     wandb_project = 'pix2pix'
     device = 'cuda:0' if torch.cuda.is_available() else 'cpu'
-    nc = 1
+    nc_in = 1
+    nc_out = 3
     n_workers = 8
     num_epochs = 1000
     save_epochs = 100

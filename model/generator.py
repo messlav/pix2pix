@@ -118,5 +118,11 @@ def test():
     print(G(x)[0].shape)
 
 
+def test2():
+    x = torch.randn((10, 1, 256, 256))  # b x nc x w x h
+    G = Generator(x.shape[1])
+    print(G(x)[0].shape)
+
+
 if __name__ == '__main__':
-    test()
+    test2()

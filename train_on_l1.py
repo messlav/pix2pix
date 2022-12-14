@@ -60,7 +60,7 @@ def main(dataset: str):
                              shuffle=False, num_workers=checkpoint_config.n_workers, pin_memory=True)
     # show_images(train_dataset, test_dataset)
     # model
-    G = Generator(checkpoint_config.nc)
+    G = Generator(checkpoint_config.nc_in)
     # init_weights(G, checkpoint_config.mean, checkpoint_config.std)
     G = G.to(checkpoint_config.device)
     # loss, optimizer and hyperparameters
