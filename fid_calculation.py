@@ -5,14 +5,20 @@ from torch.utils.data import DataLoader
 
 from datasets.facades import FacadesDataset
 from datasets.maps import Maps
+from datasets.flags import Flags
+from configs.dataset_facades_config import DatasetFacadesConfig
+from configs.dataset_maps_config import DatasetMapsConfig
+from configs.dataset_flags_config import DatasetFlagsConfig
 from model.generator import Generator
 
 
 def calc_fid(G: Generator, dataset: str = 'facades', device: str = 'cuda:0'):
     if dataset == 'facades':
-        test_dataset = FacadesDataset('data/facades', 'test')
+        test_dataset = FacadesDataset('data/facades', 'test', DatasetFacadesConfig.test_transforms)
     elif dataset == 'maps':
-        test_dataset = Maps('data/maps', 'val')
+        test_dataset = Maps('data/maps', 'val', DatasetMapsConfig.test_transforms)
+    elif dataset == 'flags':
+        test_dataset = Maps('data/flags', 'val', DatasetFlagsConfig.test_transforms)
     else:
         raise NotImplementedError
     test_loader = DataLoader(test_dataset, batch_size=32, shuffle=False,

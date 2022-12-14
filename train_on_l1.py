@@ -48,7 +48,7 @@ def main(dataset: str):
         print('using', checkpoint_config.device)
         # data
         train_transforms = dataset_config.train_transforms
-        test_transforms = dataset_config.train_transforms
+        test_transforms = dataset_config.test_transforms
         train_dataset = Flags('data/flags', 'train', train_transforms)
         test_dataset = Flags('data/flags', 'val', test_transforms)
     else:

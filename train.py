@@ -30,7 +30,7 @@ def main(dataset: str):
         print('using', checkpoint_config.device)
         # data
         train_transforms = dataset_config.train_transforms
-        test_transforms = dataset_config.train_transforms
+        test_transforms = dataset_config.test_transforms
         train_dataset = FacadesDataset('data/facades', 'train', train_transforms)
         test_dataset = FacadesDataset('data/facades', 'test', test_transforms)
     elif dataset == 'maps':
@@ -40,7 +40,7 @@ def main(dataset: str):
         print('using', checkpoint_config.device)
         # data
         train_transforms = dataset_config.train_transforms
-        test_transforms = dataset_config.train_transforms
+        test_transforms = dataset_config.test_transforms
         train_dataset = Maps('data/maps', 'train', train_transforms)
         test_dataset = Maps('data/maps', 'val', test_transforms)
     elif dataset == 'flags':
@@ -50,7 +50,7 @@ def main(dataset: str):
         print('using', checkpoint_config.device)
         # data
         train_transforms = dataset_config.train_transforms
-        test_transforms = dataset_config.train_transforms
+        test_transforms = dataset_config.test_transforms
         train_dataset = Flags('data/flags', 'train', train_transforms)
         test_dataset = Flags('data/flags', 'val', test_transforms)
     else:
