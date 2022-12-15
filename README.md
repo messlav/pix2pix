@@ -12,7 +12,7 @@ My implementation of "Image-to-Image Translation with Conditional Adversarial Ne
 
 1. Clone repo and install packages
 ```python
-git clone https://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@github.com/messlav/pix2pix.git
+git clone https://github.com/messlav/pix2pix.git
 cd pix2pix
 pip install -r requirements.txt
 ```
