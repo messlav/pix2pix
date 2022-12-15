@@ -15,7 +15,6 @@ from model.generator import Generator
 from datasets.facades import FacadesDataset
 from datasets.maps import Maps
 from datasets.flags import Flags
-from loss.l1_loss import l1_loss
 from utils.wandb_writer import WanDBWriter
 from utils.utils import show_images, init_weights
 
@@ -51,6 +50,17 @@ def main(dataset: str):
         test_transforms = dataset_config.test_transforms
         train_dataset = Flags('data/flags', 'train', train_transforms)
         test_dataset = Flags('data/flags', 'val', test_transforms)
+    elif dataset == 'flags_1d':
+        raise NotImplementedError  # need to change Dicriminator to work with 1d inputs
+        # configs
+        # checkpoint_config = TrainFlags1DConfig()
+        # dataset_config = DatasetFlagsConfig()
+        # print('using', checkpoint_config.device)
+        # # data
+        # train_transforms = dataset_config.train_transforms
+        # test_transforms = dataset_config.test_transforms
+        # train_dataset = Flags1D('data/flags', 'train', train_transforms)
+        # test_dataset = Flags1D('data/flags', 'val', test_transforms)
     else:
         raise NotImplementedError
     # show_images(train_dataset, test_dataset)

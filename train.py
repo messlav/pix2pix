@@ -18,14 +18,13 @@ from datasets.facades import FacadesDataset
 from datasets.maps import Maps
 from datasets.flags import Flags
 from datasets.flags_1d import Flags1D
-from loss.l1_loss import l1_loss
 from utils.wandb_writer import WanDBWriter
 from utils.utils import show_images, init_weights, set_random_seed
 
 
 def main(dataset: str):
     set_random_seed(3407)
-    if dataset == 'facades':
+    if dataset == 'facades':  # TODO: replace it all in one function
         # configs
         checkpoint_config = CheckpointFacadesConfig()
         dataset_config = DatasetFacadesConfig()
@@ -53,18 +52,19 @@ def main(dataset: str):
         # data
         train_transforms = dataset_config.train_transforms
         test_transforms = dataset_config.test_transforms
-        train_dataset = Flags1D('data/flags', 'train', train_transforms)
-        test_dataset = Flags1D('data/flags', 'val', test_transforms)
-    elif dataset == 'flags_1d':
-        # configs
-        checkpoint_config = TrainFlags1DConfig()
-        dataset_config = DatasetFlagsConfig()
-        print('using', checkpoint_config.device)
-        # data
-        train_transforms = dataset_config.train_transforms
-        test_transforms = dataset_config.test_transforms
         train_dataset = Flags('data/flags', 'train', train_transforms)
         test_dataset = Flags('data/flags', 'val', test_transforms)
+    elif dataset == 'flags_1d':
+        raise NotImplementedError  # need to change Dicriminator to work with 1d inputs
+        # configs
+        # checkpoint_config = TrainFlags1DConfig()
+        # dataset_config = DatasetFlagsConfig()
+        # print('using', checkpoint_config.device)
+        # # data
+        # train_transforms = dataset_config.train_transforms
+        # test_transforms = dataset_config.test_transforms
+        # train_dataset = Flags1D('data/flags', 'train', train_transforms)
+        # test_dataset = Flags1D('data/flags', 'val', test_transforms)
     else:
         raise NotImplementedError
     # show_images(train_dataset, test_dataset)
@@ -98,6 +98,7 @@ def main(dataset: str):
     D.train()
     tqdm_bar = tqdm(total=checkpoint_config.num_epochs * len(train_loader) - current_step)
     for epoch in range(checkpoint_config.num_epochs):
+        # TODO: replace train_epoch in function
         for i, (tgt_imgs, segm_imgs) in enumerate(train_loader):
             current_step += 1
             tqdm_bar.update(1)
@@ -143,6 +144,7 @@ def main(dataset: str):
             )}, os.path.join(checkpoint_config.save_path, 'checkpoint_%d.pth.tar' % epoch))
 
         # validate and wandb log
+        # TODO: replace validation in function
         if epoch % checkpoint_config.validate_epochs == 0 or epoch == checkpoint_config.num_epochs - 1:
             # add val images
             tgt_imgs, segm_imgs = next(iter(test_loader))
